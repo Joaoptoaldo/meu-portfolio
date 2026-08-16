@@ -1,6 +1,6 @@
 /**
  * Dados básicos do perfil.
- * Campos sem informação real usam placeholders explícitos [ ... ].
+ * São os dados reais fornecidos pelo proprietário do projeto.
  */
 export const profile = {
   name: 'João Pedro Toaldo',
@@ -8,12 +8,13 @@ export const profile = {
   role: 'Desenvolvedor de Software',
   area: 'Desenvolvimento de Software',
   formation: 'Sistemas de Informação',
-  institution: 'Universidade Franciscana (UFN)',
+  institution: 'Universidade Franciscana',
   institutionShort: 'UFN',
   semesters: 8,
-  location: '[CIDADE — UF]',
-  email: '[EMAIL]',
-  github: '[GitHub]',
-  linkedin: '[LinkedIn]',
-  summary: '[RESUMO PROFISSIONAL — a definir]',
+  location: 'Santa Maria - RS',
+  email: 'toaldojoaopedro@gmail.com',
+  github: 'https://github.com/Joaoptoaldo',
+  linkedin: 'https://www.linkedin.com/in/joão-pedro-toaldo-659136328/',
+  whatsapp: '+55 55 9708-8712',
+  summary: 'Acadêmico de Sistemas de Informação, com experiência em desenvolvimento web, APIs, bancos de dados e construção de projetos utilizando diferentes tecnologias e arquiteturas.',
 }

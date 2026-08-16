@@ -6,10 +6,10 @@
 import { profile } from './profile'
 
 export const welcomeStarter = [
-  { section: 'about', label: 'Sobre mim' },
-  { section: 'experience', label: 'Ver experiência' },
-  { section: 'projects', label: 'Ver projetos' },
-  { section: 'contact', label: 'Entrar em contato' },
+  { id: 'sobre', label: 'Sobre mim' },
+  { id: 'experiencia', label: 'Ver experiência' },
+  { id: 'projetos', label: 'Ver projetos' },
+  { id: 'contato', label: 'Entrar em contato' },
 ]
 
 export const welcomeConnect = [

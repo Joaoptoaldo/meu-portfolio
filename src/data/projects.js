@@ -9,6 +9,8 @@
 export const projects = [
   {
     id: 'analytics-dashboard',
+    file: 'analytics-dashboard.ts',
+    icon: 'ts',
     title: 'Analytics Dashboard',
     tagline: 'Dashboard de análise de indicadores de vendas',
     description:
@@ -29,6 +31,8 @@ export const projects = [
   },
   {
     id: 'imobsystem',
+    file: 'imobsystem.py',
+    icon: 'python',
     title: 'ImobSystem',
     tagline: 'Sistema web para gerenciamento de locação de imóveis',
     description:
@@ -48,6 +52,8 @@ export const projects = [
   },
   {
     id: 'acervohub',
+    file: 'acervohub.js',
+    icon: 'js',
     title: 'AcervoHub',
     tagline: 'Plataforma full stack de gestão de acervo pessoal',
     description:
@@ -67,6 +73,8 @@ export const projects = [
   },
   {
     id: 'somdiabetes',
+    file: 'somdiabetes.js',
+    icon: 'js',
     title: 'SomDiabetes',
     tagline: 'Sistema web de monitoramento de dados de pacientes com diabetes',
     description:
@@ -76,5 +84,51 @@ export const projects = [
     authorship: 'team',
     role:
       'Participação em equipe (aluno — Sistemas de Informação) entre múltiplos colaboradores do projeto. Sem evidência de commits individuais no histórico público.',
+  },
+  {
+    id: 'automacao-python',
+    file: 'automacao-em-python.py',
+    icon: 'python',
+    title: 'Automação em Python',
+    tagline: 'Scripts e exemplos práticos de automação',
+    description:
+      'Repositório de exemplos práticos de automação com Python: escritório (relatórios, e-mails, PDFs), web scraping e downloads, integração de APIs (bots, posts sociais), IA/ML (análise de sentimentos, imagens), monitoramento de sites com alertas e dashboards interativos, com código organizado e testes.',
+    technologies: [
+      'Python',
+      'requests',
+      'pandas',
+      'openpyxl',
+      'selenium',
+      'beautifulsoup4',
+      'streamlit',
+      'pytest',
+      'python-telegram-bot',
+    ],
+    repository: 'https://github.com/Joaoptoaldo/automacao-em-python',
+    authorship: 'sole',
+  },
+  {
+    id: 'calorie-tracker',
+    file: 'calorie-tracker.ts',
+    icon: 'ts',
+    title: 'CalorieDiary',
+    tagline: 'Workout & Calorie Tracker — projeto final do CS50x (Harvard)',
+    description:
+      'Aplicação full stack para rastrear o balanço calórico diário: registro de alimentos (calorias ingeridas) e treinos (calorias gastas), com dashboard do saldo líquido em tempo real, gráfico interativo, histórico com exclusão em tempo real (SPA) e autenticação com hash. Desenvolvido como projeto final do curso CS50 — Introduction to Computer Science (Harvard University).',
+    technologies: [
+      'React',
+      'Vite',
+      'TypeScript',
+      'Tailwind CSS',
+      'Recharts',
+      'Python',
+      'Flask',
+      'Flask-SQLAlchemy',
+      'SQLite',
+      'PostgreSQL',
+      'Docker',
+    ],
+    repository: 'https://github.com/Joaoptoaldo/calorie-tracker',
+    authorship: 'sole',
   },
 ]

@@ -1,69 +1,81 @@
 /**
- * Habilidades confirmadas no PORTFOLIO_CONTEXT.md (§10), por categoria.
+ * Habilidades por categoria, com nível de domínio em barras de progresso.
  *
- * Estrutura de nível:
- *   'use'     -> "Utilizo"          (tecnologia que João usa em projetos)
- *   'learning'-> "Em aprendizado"   (tecnologia em estudo)
- *   null      -> nível a definir    (NÃO rotular até dado real)
+ * Estrutura:
+ *   - level   : 'use' (Utilizo) | 'learning' (Em aprendizado) | undefined
+ *               (o badge "Aprofundando conhecimentos" só aparece na
+ *               categoria isLearning, onde o badge fica oculto).
+ *   - progress: 0–100, autoavaliação ANCorADA em evidência (projetos reais
+ *               entregues, autonomia em bugs, capacidade de decisão/ensino).
+ *               Rúbrica: ≈20 explorando · ≈45 usa com apoio · ≈65 autonomia
+ *               · ≈85 domina trade-offs · ≈95 ensina/lidera.
  *
- * Regra: nada de "avançado"/"especialista" nem barras de progresso.
+ * IMPORTANTE: os valores abaixo são SUGERIDOS a partir dos projetos reais do
+ * portfólio e da rúbrica — ajuste segundo sua própria avaliação.
  */
 export const skillCategories = [
+  {
+    id: 'learning',
+    title: 'Aprofundando conhecimentos',
+    isLearning: true,
+    skills: [
+      { name: '.NET', level: 'learning', progress: 25 },
+      { name: 'C#', level: 'learning', progress: 30 },
+      { name: 'ASP.NET Core', level: 'learning', progress: 15 },
+    ],
+  },
   {
     id: 'languages',
     title: 'Linguagens',
     skills: [
-      { name: 'JavaScript', level: null },
-      { name: 'Java', level: null },
-      { name: 'Python', level: null },
-      { name: 'C#', level: null },
-      { name: 'SQL', level: null },
-      { name: 'C', level: null },
-      { name: 'C++', level: null },
-      { name: 'Rust', level: null },
+      { name: 'JavaScript', progress: 85 },
+      { name: 'TypeScript', progress: 80 },
+      { name: 'Python', progress: 80 },
+      { name: 'Java', progress: 40 },
     ],
   },
   {
     id: 'frontend',
     title: 'Frontend',
     skills: [
-      { name: 'React', level: null },
-      { name: 'Tailwind CSS', level: null },
-      { name: 'HTML', level: null },
-      { name: 'CSS', level: null },
+      { name: 'React', progress: 70 },
+      { name: 'Tailwind CSS', progress: 75 },
+      { name: 'HTML', progress: 90 },
+      { name: 'CSS', progress: 80 },
     ],
   },
   {
     id: 'backend',
     title: 'Backend',
     skills: [
-      { name: 'Node.js', level: null },
-      { name: 'Express', level: null },
-      { name: 'Django', level: null },
-      { name: 'ASP.NET Core', level: null },
-      { name: 'APIs REST', level: null },
+      { name: 'Node.js', progress: 75 },
+      { name: 'Express', progress: 70 },
+      { name: 'FastAPI', progress: 60 },
+      { name: 'Django', progress: 70 },
     ],
   },
   {
     id: 'database',
     title: 'Banco de Dados',
     skills: [
-      { name: 'PostgreSQL', level: null },
-      { name: 'MySQL', level: null },
-      { name: 'MongoDB', level: null },
-      { name: 'SQLite', level: null },
+      { name: 'PostgreSQL', progress: 70 },
+      { name: 'MySQL', progress: 45 },
+      { name: 'MongoDB', progress: 75 },
+      { name: 'SQLite', progress: 65 },
     ],
   },
   {
     id: 'tools',
     title: 'Ferramentas',
     skills: [
-      { name: 'Git', level: null },
-      { name: 'GitHub', level: null },
-      { name: 'Docker', level: null },
-      { name: 'Postman', level: null },
-      { name: 'VS Code', level: null },
-      { name: 'Vite', level: null },
+      { name: 'Git', progress: 75 },
+      { name: 'GitHub', progress: 85 },
+      { name: 'Docker', progress: 60 },
+      { name: 'Postman', progress: 70 },
+      { name: 'VS Code', progress: 85 },
+      { name: 'Vite', progress: 60 },
+      { name: 'Bootstrap', progress: 80 },
+      { name: 'Figma', progress: 55 },
     ],
   },
 ]

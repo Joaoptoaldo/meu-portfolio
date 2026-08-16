@@ -8,6 +8,7 @@ export const education = {
     {
       title: 'Sistemas de Informação',
       institution: 'Universidade Franciscana — UFN',
+      status: 'Em andamento',
       duration: '8 semestres',
     },
   ],

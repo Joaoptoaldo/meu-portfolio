@@ -1,13 +1,34 @@
+import { projects } from './projects'
+
 /**
- * Definição da árvore do workspace (Explorer) e da navegação.
- *
- * Cada "arquivo" representa uma seção do portfólio.
- * Pastas (`type: 'folder'`) apenas agrupam arquivos — não têm conteúdo próprio.
- *
- * A pasta `projetos/` lista os nomes de projetos conhecidos (do contexto).
- * Detalhes de cada projeto vivem em `projects.js` (Etapa 12); nesta fase os
- * arquivos de projeto apenas abrem a seção de Projetos.
+ * Converte um item de `projects.js` em um nó de arquivo para o Explorer.
  */
+export function getProjectFileNode(project) {
+  let icon = project.icon
+  if (!icon) {
+    const techs = (project.technologies || []).map((t) => t.toLowerCase())
+    if (techs.some((t) => t.includes('typescript') || t === 'ts')) icon = 'ts'
+    else if (techs.some((t) => t.includes('python') || t === 'py')) icon = 'python'
+    else if (techs.some((t) => t.includes('react') || t === 'jsx')) icon = 'react'
+    else icon = 'js'
+  }
+
+  let fileName = project.file
+  if (!fileName) {
+    const ext = icon === 'python' ? '.py' : icon === 'ts' ? '.ts' : icon === 'react' ? '.jsx' : '.js'
+    fileName = `${project.id}${ext}`
+  }
+
+  return {
+    id: `projeto-${project.id}`,
+    file: fileName,
+    section: 'projects',
+    icon,
+    description: project.title,
+    projectId: project.id,
+  }
+}
+
 export const workspaceTree = {
   rootName: 'joao-pedro',
   files: [
@@ -40,49 +61,22 @@ export const workspaceTree = {
       icon: 'folder',
       description: 'Projetos',
       defaultOpen: true,
-      children: [
-        {
-          id: 'projeto-analytics-dashboard',
-          file: 'analytics-dashboard.js',
-          section: 'projects',
-          icon: 'js',
-          description: 'Analytics Dashboard',
-        },
-        {
-          id: 'projeto-imobsystem',
-          file: 'imobsystem.js',
-          section: 'projects',
-          icon: 'js',
-          description: 'ImobSystem',
-        },
-        {
-          id: 'projeto-acervohub',
-          file: 'acervohub.js',
-          section: 'projects',
-          icon: 'js',
-          description: 'AcervoHub',
-        },
-        {
-          id: 'projeto-somdiabetes',
-          file: 'somdiabetes.js',
-          section: 'projects',
-          icon: 'js',
-          description: 'SomDiabetes',
-        },
-      ],
+      get children() {
+        return projects.map(getProjectFileNode)
+      },
     },
     {
       id: 'experiencia',
-      file: 'experiencia.js',
+      file: 'experiencia.jsx',
       section: 'experience',
-      icon: 'js',
+      icon: 'react',
       description: 'Experiência',
     },
     {
       id: 'formacao',
-      file: 'formacao.js',
+      file: 'formacao.jsx',
       section: 'education',
-      icon: 'js',
+      icon: 'react',
       description: 'Formação',
     },
     {
@@ -99,7 +93,7 @@ export const workspaceTree = {
  * Achata a árvore em uma lista plana de entradas abertáveis (com `section`).
  * Usado pelo contexto (fileIndex) e por quem precisar de uma lista simples.
  */
-export function flattenFiles(tree) {
+export function flattenFiles(tree = workspaceTree) {
   const result = []
   const walk = (entries) => {
     for (const entry of entries) {
@@ -116,3 +110,4 @@ export const initialOpened = ['welcome', 'sobre']
 
 /** Arquivo ativo ao iniciar. */
 export const initialActive = 'welcome'
+

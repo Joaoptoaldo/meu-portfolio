@@ -50,6 +50,80 @@ const PATHS = {
       <path d="M16.9 3.1c.6 2.3.6 4.6-.4 6.9-1.3 2.8-3.4 4.4-3.4 2.6 0-1.6 1.5-3 2.4-5-.9 1.3-3 3-3.7 3 1.2-2 3.9-4.6 3.9-6.2l1.2-1.3Z" />
     </>
   ),
+  /* View: busca (Search) */
+  search: (
+    <>
+      <circle cx="11" cy="11" r="6.5" />
+      <path d="m20 20-4.5-4.5" />
+    </>
+  ),
+  /* View: Source Control (Git) */
+  gitBranch: (
+    <>
+      <circle cx="7" cy="5" r="2.5" />
+      <circle cx="7" cy="19" r="2.5" />
+      <circle cx="17" cy="7" r="2.5" />
+      <path d="M7 7.5v9" />
+      <path d="M17 9.5a8 8 0 0 1-8 8" />
+    </>
+  ),
+  /* Notificações */
+  bell: (
+    <>
+      <path d="M6 17h12" />
+      <path d="M7 17a5 5 0 0 1 10 0" />
+      <path d="M12 4v1.5" />
+      <path d="M12 3.2a1.5 1.5 0 0 1 1.5 1.5" />
+      <circle cx="12" cy="19.5" r="0.5" />
+    </>
+  ),
+  /* Configurações (engrenagem) */
+  gear: (
+    <>
+      <circle cx="12" cy="12" r="3" />
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
+    </>
+  ),
+  /* Zen Mode */
+  zen: (
+    <>
+      <path d="M4 4h5" />
+      <path d="M15 4h5" />
+      <path d="M4 20h5" />
+      <path d="M15 20h5" />
+      <path d="M4 12h2M18 12h2" />
+    </>
+  ),
+  /* Split editor (abrir ao lado) */
+  split: (
+    <>
+      <path d="M4 4h16v16H4z" />
+      <path d="M12 4v16" />
+    </>
+  ),
+  arrowLeft: <path d="M15 6l-6 6 6 6" />,
+  arrowRight: <path d="M9 6l6 6-6 6" />,
+  settings: (
+    <>
+      <circle cx="12" cy="12" r="3" />
+      <path d="M12 2.5v2.2M12 19.3v2.2M19.5 12h-2.2M6.7 12H4.5M17.7 6.3l-1.6 1.6M7.9 16.1l-1.6 1.6M17.7 17.7l-1.6-1.6M7.9 7.9 6.3 6.3" />
+    </>
+  ),
+  list: (
+    <>
+      <path d="M9 6h12" />
+      <path d="M9 12h12" />
+      <path d="M9 18h12" />
+      <path d="M4 6h.01M4 12h.01M4 18h.01" />
+    </>
+  ),
+  layout: (
+    <>
+      <rect x="3" y="4" width="18" height="16" rx="1.5" />
+      <path d="M3 9h18" />
+      <path d="M9 9v11" />
+    </>
+  ),
 }
 
 function Icon({ name, className = 'h-4 w-4', strokeWidth = 1.5, ...rest }) {
