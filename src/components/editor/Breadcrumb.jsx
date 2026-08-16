@@ -4,16 +4,17 @@
  */
 import { useWorkspace } from '../../hooks/useWorkspace'
 
-export default function Breadcrumb() {
+export default function Breadcrumb({ file = null }) {
   const { activeFile, files } = useWorkspace()
+  const current = file ?? activeFile
   const isProject = files.some(
-    (f) => f.id === activeFile?.id && f.section === 'projects',
+    (f) => f.id === current?.id && f.section === 'projects',
   )
 
   return (
     <nav
       aria-label="Navegação estrutural"
-      className="flex min-w-0 items-center gap-1 px-4 pt-3 text-xs"
+      className="flex shrink-0 min-w-0 items-center gap-1 px-4 pt-3 text-xs"
     >
       <span className="shrink-0 text-text-muted">joao-pedro</span>
       <span aria-hidden="true" className="shrink-0 text-text-disabled">
@@ -28,7 +29,7 @@ export default function Breadcrumb() {
         </>
       )}
       <span className="min-w-0 truncate text-text-primary">
-        {activeFile?.file ?? '—'}
+        {current?.file ?? '—'}
       </span>
     </nav>
   )

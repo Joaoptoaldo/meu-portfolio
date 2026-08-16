@@ -1,7 +1,8 @@
 /**
  * MobileNav — navegação inferior compacta (mobile, < sm).
- * Compartilha as mesmas ações reais da ActivityBar (sem duplicação).
- * Única exceção: no mobile o botão "Explorer" abre o drawer e então
+ * Compartilha as mesmas ações reais da ActivityBar (sem duplicação);
+ * apenas ações marcadas com `mobile: true` aparecem aqui.
+ * Única exceção: no mobile o botão "Arquivos" abre o drawer e então
  * o clique alterna (fecha) através do mesmo estado.
  */
 import { useWorkspace } from '../../hooks/useWorkspace'
@@ -30,19 +31,21 @@ function BottomItem({ action }) {
           isActive ? 'text-accent' : ''
         }`}
       >
-        {action.id === 'explorer' ? 'Arquivos' : 'Perfil'}
+        {action.mobileLabel ?? action.id}
       </span>
     </button>
   )
 }
 
 export default function MobileNav() {
+  const mobileActions = activityActions.filter((a) => a.mobile)
+
   return (
     <nav
       aria-label="Navegação principal do portfólio"
       className="flex shrink-0 border-t border-border bg-bg-side sm:hidden"
     >
-      {activityActions.map((action) => (
+      {mobileActions.map((action) => (
         <BottomItem key={action.id} action={action} />
       ))}
     </nav>

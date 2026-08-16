@@ -13,7 +13,7 @@ import { useWorkspace } from '../../hooks/useWorkspace'
 import Icon from '../ui/Icon'
 
 export default function TitleBar() {
-  const { activeFile, toggleExplorer, explorerVisible } = useWorkspace()
+  const { activeFile, toggleExplorer, explorerVisible, restoreLayout } = useWorkspace()
 
   return (
     <header className="relative flex h-9 shrink-0 items-center border-b border-border bg-bg-title">
@@ -28,13 +28,15 @@ export default function TitleBar() {
         >
           <Icon name="files" className="h-4 w-4" />
         </button>
-        <span
-          aria-hidden="true"
-          className="hidden font-mono text-[11px] font-semibold text-accent sm:block"
-          title="Workspace"
+        <button
+          type="button"
+          onClick={restoreLayout}
+          aria-label="Restaurar layout e mostrar Explorer"
+          className="hidden h-9 w-full items-center justify-center font-mono text-[11px] font-semibold text-accent transition-colors hover:bg-bg-hover sm:flex"
+          title="Restaurar layout"
         >
           ◈
-        </span>
+        </button>
       </div>
 
       {/* Identidade do workspace */}

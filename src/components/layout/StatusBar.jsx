@@ -11,9 +11,23 @@
  */
 import { profile } from '../../data/profile'
 import { useClock } from '../../hooks/useClock'
+import { useWorkspace } from '../../hooks/useWorkspace'
 
 export default function StatusBar() {
   const time = useClock()
+  const { panelOpen, panelView, togglePanel, selectPanelView } = useWorkspace()
+
+  function handleTerminalClick() {
+    if (!panelOpen) {
+      selectPanelView('terminal')
+    } else if (panelView === 'terminal') {
+      togglePanel()
+    } else {
+      selectPanelView('terminal')
+    }
+  }
+
+  const terminalActive = panelOpen && panelView === 'terminal'
 
   return (
     <footer className="flex h-6 shrink-0 items-center overflow-hidden border-t border-border bg-bg-title font-mono text-[11px] text-text-secondary">
@@ -34,6 +48,24 @@ export default function StatusBar() {
           ⎇
         </span>
         <span className="hidden shrink-0 px-2 sm:block">Git: main</span>
+
+        {/* Botão Terminal — estética VS Code */}
+        <button
+          type="button"
+          id="statusbar-terminal-toggle"
+          onClick={handleTerminalClick}
+          aria-label={terminalActive ? 'Fechar terminal' : 'Abrir terminal'}
+          aria-pressed={terminalActive}
+          title={terminalActive ? 'Fechar terminal (Ctrl+J)' : 'Abrir terminal (Ctrl+J)'}
+          className={`ml-2 flex h-6 items-center gap-1 px-2 transition-colors hover:bg-bg-hover ${
+            terminalActive
+              ? 'text-accent'
+              : 'text-text-muted hover:text-text-secondary'
+          }`}
+        >
+          <span aria-hidden="true" className="text-[10px] leading-none">&gt;_</span>
+          <span className="hidden sm:inline">TERMINAL</span>
+        </button>
       </div>
 
       <div className="ml-auto flex shrink-0 items-center">

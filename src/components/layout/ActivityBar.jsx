@@ -1,6 +1,11 @@
 /**
  * Activity Bar — barra vertical na extrema esquerda (desktop).
- * Ações reais: alternar Explorer e abrir Contato/Perfil.
+ *
+ * Dois grupos:
+ *  - main   : views da sidebar (Explorer, Busca, Source Control);
+ *  - bottom : utilitários (Zen Mode, Notificações, Configurações, Perfil).
+ *
+ * Cada ação é uma ação real definida em data/activity.js.
  * No mobile, a navegação inferior é responsabilidade da `MobileNav`.
  */
 import { useWorkspace } from '../../hooks/useWorkspace'
@@ -36,13 +41,22 @@ function ActionButton({ action }) {
 }
 
 export default function ActivityBar() {
+  const main = activityActions.filter((a) => a.group === 'main')
+  const bottom = activityActions.filter((a) => a.group === 'bottom')
+
   return (
     <nav
       aria-label="Navegação principal"
       className="hidden w-[var(--spacing-activitybar)] shrink-0 flex-col items-center border-r border-border bg-bg-side sm:flex"
     >
       <div className="flex w-full flex-col items-center pt-2">
-        {activityActions.map((action) => (
+        {main.map((action) => (
+          <ActionButton key={action.id} action={action} />
+        ))}
+      </div>
+
+      <div className="mt-auto flex w-full flex-col items-center pb-2">
+        {bottom.map((action) => (
           <ActionButton key={action.id} action={action} />
         ))}
       </div>
