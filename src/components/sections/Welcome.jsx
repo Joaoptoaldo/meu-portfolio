@@ -23,7 +23,7 @@ export default function Welcome() {
   const recent = openTabs.slice(-4).reverse()
 
   return (
-    <div className="mx-auto flex min-w-0 w-full max-w-3xl flex-col gap-8 px-6 py-10">
+    <div className="mx-auto flex min-w-0 w-full max-w-5xl flex-col gap-6 px-6 pt-6 pb-12 md:px-8 md:pt-8 md:pb-16">
       <section>
         <p className="mb-2 font-mono text-sm text-text-muted">{'>'}</p>
         <h1 className="text-3xl font-bold leading-tight text-text-primary">
@@ -32,7 +32,7 @@ export default function Welcome() {
         <p className="mt-1 font-mono text-sm text-text-secondary">
           {profile.role} — {profile.formation}
         </p>
-        <p className="mt-3 max-w-xl text-sm leading-relaxed text-text-secondary">
+        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-text-secondary">
           {profile.summary}
         </p>
       </section>
@@ -44,10 +44,10 @@ export default function Welcome() {
           </h2>
           <ul className="space-y-1">
             {welcomeStarter.map((item) => (
-              <li key={item.section}>
+              <li key={item.id}>
                 <button
                   type="button"
-                  onClick={() => openFile(item.section)}
+                  onClick={() => openFile(item.id)}
                   className="group flex w-full items-center justify-between rounded px-2 py-1 text-left text-sm text-accent transition-colors hover:bg-bg-hover"
                 >
                   {item.label}

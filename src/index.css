@@ -100,6 +100,66 @@
 }
 
 /* ============================================================
+   TEMA CLARO (Settings → Light)
+   Mantém a identidade azul-elétrico, mas melhora legibilidade em fundo claro.
+   ============================================================ */
+:root[data-theme="light"] {
+  --color-bg-base: #eef2f8;
+  --color-bg-editor: #ffffff;
+  --color-bg-side: #f5f7fb;
+  --color-bg-side-2: #eef2f8;
+  --color-bg-title: #e7ebf2;
+  --color-bg-tab: #eef2f8;
+  --color-bg-tab-active: #ffffff;
+  --color-bg-hover: rgba(15, 23, 42, 0.07);
+  --color-bg-active: rgba(37, 99, 235, 0.12);
+  --color-bg-tag: rgba(37, 99, 235, 0.1);
+
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #475569;
+  --color-text-muted: #64748b;
+  --color-text-disabled: #94a3b8;
+
+  --color-accent-bright: var(--color-accent);
+  --color-accent-dim: #1d4ed8;
+  --color-accent-border: color-mix(in srgb, var(--color-accent) 45%, transparent);
+
+  --color-border: #d8dee8;
+  --color-border-strong: #c4ccd9;
+  --color-border-active: color-mix(in srgb, var(--color-accent) 50%, transparent);
+}
+
+:root[data-accent="purple"] {
+  --color-accent-bright: #c4b5fd;
+  --color-accent-dim: #6d28d9;
+  --color-accent-border: rgba(167, 139, 250, 0.5);
+}
+
+:root[data-accent="green"] {
+  --color-accent-bright: #86efac;
+  --color-accent-dim: #16a34a;
+  --color-accent-border: rgba(74, 222, 128, 0.5);
+}
+
+:root[data-accent="orange"] {
+  --color-accent-bright: #fdba74;
+  --color-accent-dim: #ea580c;
+  --color-accent-border: rgba(251, 146, 60, 0.5);
+}
+
+:root[data-accent="pink"] {
+  --color-accent-bright: #f9a8d4;
+  --color-accent-dim: #db2777;
+  --color-accent-border: rgba(244, 114, 182, 0.5);
+}
+
+:root[data-theme="light"][data-accent] {
+  --color-accent-bright: var(--color-accent);
+  --color-accent-dim: color-mix(in srgb, var(--color-accent) 75%, #0f172a);
+  --color-accent-border: color-mix(in srgb, var(--color-accent) 45%, transparent);
+}
+
+/* ============================================================
    BASE
    ============================================================ */
 @layer base {
@@ -117,6 +177,7 @@
     margin: 0;
     background-color: var(--color-bg-base);
     color: var(--color-text-primary);
+    /* Scrollbar e elementos nativos seguem o tema selecionado. */
     color-scheme: dark;
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
@@ -125,26 +186,13 @@
     overflow: hidden;
   }
 
+  :root[data-theme="light"] body {
+    color-scheme: light;
+  }
+
   ::selection {
     background-color: var(--color-bg-active);
     color: var(--color-text-primary);
-  }
-
-  ::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-  }
-  ::-webkit-scrollbar-thumb {
-    background-color: #2a2d36;
-    border-radius: 8px;
-    border: 2px solid transparent;
-    background-clip: content-box;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background-color: #3a3e49;
-  }
-  ::-webkit-scrollbar-corner {
-    background-color: transparent;
   }
 
   /* Foco visível para acessibilidade */
@@ -158,18 +206,48 @@
    UTILITIES / COMPONENTS REUTILIZÁVEIS
    ============================================================ */
 @layer utilities {
-  /* Barra de rolagem fina para painéis internos */
-  .scroll-thin {
-    scrollbar-width: thin;
-  }
-  .scroll-thin::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-  }
-
   /* Texto monoespaçado (backup utilitário) */
   .text-mono {
     font-family: var(--font-mono);
+  }
+
+  /* Scroll com rolagem (teclado/gesto) mas sem barra visível */
+  .scrollbar-hidden {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Scrollbar fina estilo sistema — usada na área de conteúdo do Editor */
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 3px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 255, 255, 0.28);
+  }
+
+  :root[data-theme="light"] .scrollbar-thin {
+    scrollbar-color: rgba(0, 0, 0, 0.18) transparent;
+  }
+  :root[data-theme="light"] .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.18);
+  }
+  :root[data-theme="light"] .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.32);
   }
 }
 
