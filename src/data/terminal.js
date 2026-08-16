@@ -28,9 +28,6 @@ export const OPEN_MAP = {
   'contato.jsx': 'contato',
 }
 
-/** Comandos que navegam o workspace (precisam de callbacks do componente). */
-export const OPENABLE_TARGETS = ['welcome', 'sobre', 'habilidades', 'projetos', 'experiencia', 'formacao', 'contato']
-
 export function formatExperience() {
   const lines = []
   for (const item of experience.items) {
