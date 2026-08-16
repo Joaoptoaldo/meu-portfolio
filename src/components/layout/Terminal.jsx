@@ -9,10 +9,13 @@
 import { useEffect, useRef, useState } from 'react'
 import { useWorkspace } from '../../hooks/useWorkspace'
 import { profile } from '../../data/profile'
-import { skillCategories } from '../../data/skills'
-import { projects } from '../../data/projects'
-import { experience } from '../../data/experience'
-import { TERMINAL_COMMANDS } from '../../data/terminal'
+import {
+  TERMINAL_COMMANDS,
+  OPEN_MAP,
+  formatExperience,
+  formatProjects,
+  formatSkills,
+} from '../../data/terminal'
 
 /** Prompt do "shell". */
 const PROMPT = `${profile.firstName.toLowerCase().replace(/\s+/g, '-')}@portfolio`
@@ -26,52 +29,6 @@ const BANNER = [
 ]
 
 const ARROW = '>'
-
-/** Comandos que abrem seções do workspace (accionam via openFile). */
-const OPEN_MAP = {
-  Welcome: 'welcome',
-  'Sobre.jsx': 'sobre',
-  'habilidades.json': 'habilidades',
-  projetos: 'projetos',
-  'experiencia.jsx': 'experiencia',
-  'formacao.jsx': 'formacao',
-  'contato.jsx': 'contato',
-}
-
-function formatExperience() {
-  const lines = []
-  for (const item of experience.items) {
-    lines.push(`${item.period}  •  ${item.role}`)
-    lines.push(`           ${item.company}`)
-  }
-  return lines
-}
-
-function formatProjects() {
-  const lines = []
-  for (const p of projects) {
-    lines.push(`${p.title}`)
-    lines.push(`  ${p.tagline}`)
-    lines.push(`  Tech: ${p.technologies.join(', ')}`)
-    lines.push(`  ${p.repository}`)
-    lines.push('')
-  }
-  return lines
-}
-
-function formatSkills() {
-  const lines = []
-  for (const cat of skillCategories) {
-    lines.push(`[${cat.title}]`)
-    for (const s of cat.skills) {
-      const pct = Math.round(s.progress ?? 0)
-      const level = s.level === 'learning' ? ' (estudando)' : ''
-      lines.push(`  ${s.name}${level}  —  ${pct}%`)
-    }
-    lines.push('')
-  }
-  return lines
-}
 
 /** Resposta de um comando que navega o workspace (retorna null para silêncio). */
 function handleOpen(cmd, openFile, setPanelView) {
