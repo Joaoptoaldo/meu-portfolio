@@ -1,5 +1,5 @@
-import { useCallback } from 'react'
 import { useWorkspace } from '../../hooks/useWorkspace'
+import { useResize } from '../../hooks/useResize'
 import Terminal from './Terminal'
 
 const VIEWS = [
@@ -52,41 +52,7 @@ export default function Panel() {
 
   const height = typeof panelHeight === 'number' && !Number.isNaN(panelHeight) ? panelHeight : 160
 
-  const startResizing = useCallback(
-    (e) => {
-      e.preventDefault()
-      const startY = e.touches && e.touches.length > 0 ? e.touches[0].clientY : e.clientY
-      if (typeof startY !== 'number' || Number.isNaN(startY)) return
-      const startHeight = height
-
-      document.body.style.cursor = 'row-resize'
-      document.body.style.userSelect = 'none'
-
-      const onMove = (moveEvent) => {
-        const currentY = moveEvent.touches && moveEvent.touches.length > 0
-          ? moveEvent.touches[0].clientY
-          : moveEvent.clientY
-        if (typeof currentY !== 'number' || Number.isNaN(currentY)) return
-        const deltaY = startY - currentY
-        setPanelHeight(startHeight + deltaY)
-      }
-
-      const onEnd = () => {
-        document.body.style.cursor = ''
-        document.body.style.userSelect = ''
-        window.removeEventListener('mousemove', onMove)
-        window.removeEventListener('mouseup', onEnd)
-        window.removeEventListener('touchmove', onMove)
-        window.removeEventListener('touchend', onEnd)
-      }
-
-      window.addEventListener('mousemove', onMove)
-      window.addEventListener('mouseup', onEnd)
-      window.addEventListener('touchmove', onMove)
-      window.addEventListener('touchend', onEnd)
-    },
-    [height, setPanelHeight],
-  )
+  const startResizing = useResize('vertical', height, setPanelHeight)
 
   if (!panelOpen) return null
 

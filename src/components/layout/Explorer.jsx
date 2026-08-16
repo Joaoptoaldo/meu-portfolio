@@ -14,9 +14,10 @@
  * Clique direito em um arquivo abre um context menu com ações reais:
  * Abrir, Abrir em nova aba e Fechar.
  */
-import { memo, useCallback, useEffect, useRef, useState } from 'react'
+import { memo, useEffect, useRef, useState } from 'react'
 import { workspaceTree } from '../../data/sections'
 import { useWorkspace } from '../../hooks/useWorkspace'
+import { useResize } from '../../hooks/useResize'
 import Icon from '../ui/Icon'
 import FileIcon from '../ui/FileIcon'
 import SearchView from './SearchView'
@@ -399,42 +400,7 @@ export default function Explorer() {
   const { explorerVisible, toggleExplorer, explorerView, explorerWidth, setExplorerWidth } = useWorkspace()
 
   const width = typeof explorerWidth === 'number' && !Number.isNaN(explorerWidth) ? explorerWidth : 264
-
-  const startResizing = useCallback(
-    (e) => {
-      e.preventDefault()
-      const startX = e.touches && e.touches.length > 0 ? e.touches[0].clientX : e.clientX
-      if (typeof startX !== 'number' || Number.isNaN(startX)) return
-      const startWidth = width
-
-      document.body.style.cursor = 'col-resize'
-      document.body.style.userSelect = 'none'
-
-      const onMove = (moveEvent) => {
-        const currentX = moveEvent.touches && moveEvent.touches.length > 0
-          ? moveEvent.touches[0].clientX
-          : moveEvent.clientX
-        if (typeof currentX !== 'number' || Number.isNaN(currentX)) return
-        const deltaX = currentX - startX
-        setExplorerWidth(startWidth + deltaX)
-      }
-
-      const onEnd = () => {
-        document.body.style.cursor = ''
-        document.body.style.userSelect = ''
-        window.removeEventListener('mousemove', onMove)
-        window.removeEventListener('mouseup', onEnd)
-        window.removeEventListener('touchmove', onMove)
-        window.removeEventListener('touchend', onEnd)
-      }
-
-      window.addEventListener('mousemove', onMove)
-      window.addEventListener('mouseup', onEnd)
-      window.addEventListener('touchmove', onMove)
-      window.addEventListener('touchend', onEnd)
-    },
-    [width, setExplorerWidth],
-  )
+  const startResizing = useResize('horizontal', width, setExplorerWidth)
 
   return (
     <>
