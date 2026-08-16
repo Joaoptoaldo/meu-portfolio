@@ -142,36 +142,38 @@ export function WorkspaceProvider({ children }) {
   const activeId = activeGroup?.active ?? null
   const activeFile = activeId ? fileIndex[activeId] : null
 
-  // salva estado no localStorage
+  // salva estado no localStorage (única fonte de persistência, com debounce
+  // para agrupar escritas rápidas como drag de resize)
   useEffect(() => {
-    saveState({
-      theme,
-      accent,
-      zen,
-      explorerVisible,
-      explorerView,
-      explorerWidth,
-      panelOpen,
-      panelView,
-      panelHeight,
-      groups,
-      activeGroupId,
-      navHistory: persisted.navHistory ?? [],
-    })
+    const timer = setTimeout(() => {
+      saveState({
+        theme,
+        accent,
+        zen,
+        explorerVisible,
+        explorerView,
+        explorerWidth,
+        panelOpen,
+        panelView,
+        panelHeight,
+        groups,
+        activeGroupId,
+        navHistory: persisted.navHistory ?? [],
+      })
+    }, 50)
+    return () => clearTimeout(timer)
   }, [theme, accent, zen, explorerVisible, explorerView, explorerWidth, panelOpen, panelView, panelHeight, groups, activeGroupId, persisted.navHistory])
 
   const setExplorerWidth = useCallback((w) => {
     const num = typeof w === 'number' && !Number.isNaN(w) ? w : 264
     const next = Math.max(160, Math.min(500, num))
     setExplorerWidthState(next)
-    setPersisted((prev) => ({ ...prev, explorerWidth: next }))
   }, [])
 
   const setPanelHeight = useCallback((h) => {
     const num = typeof h === 'number' && !Number.isNaN(h) ? h : 160
     const next = Math.max(80, Math.min(600, num))
     setPanelHeightState(next)
-    setPersisted((prev) => ({ ...prev, panelHeight: next }))
   }, [])
 
   // aplica o tema e as cores de destaque no css global
@@ -182,20 +184,14 @@ export function WorkspaceProvider({ children }) {
     root.style.setProperty('--color-accent', ACCENT_COLORS[accent] ?? ACCENT_COLORS.blue)
   }, [theme, accent])
 
-  const persistPatch = useCallback((patch) => {
-    setPersisted((prev) => ({ ...prev, ...patch }))
-  }, [])
-
   function updateGroup(nextGroups, nextActiveGroupId = activeGroupId) {
     setGroups(nextGroups)
     setActiveGroupId(nextActiveGroupId)
-    persistPatch({ groups: nextGroups, activeGroupId: nextActiveGroupId })
   }
 
   function setExplorerView(view) {
     setExplorerViewState(view)
     setExplorerVisible(true)
-    persistPatch({ explorerView: view, explorerVisible: true })
   }
 
   function toggleExplorerView(view) {
@@ -207,25 +203,16 @@ export function WorkspaceProvider({ children }) {
   }
 
   function toggleExplorer() {
-    setExplorerVisible((value) => {
-      const next = !value
-      persistPatch({ explorerVisible: next })
-      return next
-    })
+    setExplorerVisible((value) => !value)
   }
 
   function selectPanelView(view) {
     setPanelViewState(view)
     setPanelOpen(true)
-    persistPatch({ panelView: view, panelOpen: true })
   }
 
   function togglePanel() {
-    setPanelOpen((value) => {
-      const next = !value
-      persistPatch({ panelOpen: next })
-      return next
-    })
+    setPanelOpen((value) => !value)
   }
 
   function openFile(id) {
@@ -339,7 +326,6 @@ export function WorkspaceProvider({ children }) {
   function setActiveGroup(groupId) {
     if (!groups.some((g) => g.id === groupId)) return
     setActiveGroupId(groupId)
-    persistPatch({ activeGroupId: groupId })
   }
 
   const navHistory = persisted.navHistory ?? []
@@ -406,7 +392,6 @@ export function WorkspaceProvider({ children }) {
     setZen(false)
     setExplorerVisible(true)
     setExplorerViewState('explorer')
-    persistPatch({ zen: false, explorerVisible: true, explorerView: 'explorer' })
   }
 
   function notify(message, type = 'info') {
@@ -508,14 +493,8 @@ export function WorkspaceProvider({ children }) {
     dismissToast,
     showOutline,
     openSearchResult,
-    setTheme: (next) => {
-      setTheme(next)
-      setPersisted((prev) => ({ ...prev, theme: next }))
-    },
-    setAccent: (next) => {
-      setAccent(next)
-      setPersisted((prev) => ({ ...prev, accent: next }))
-    },
+    setTheme,
+    setAccent,
     toggleZen,
     restoreLayout,
   }
