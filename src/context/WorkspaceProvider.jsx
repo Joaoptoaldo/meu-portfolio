@@ -9,19 +9,7 @@ import { loadState, saveState } from '../utils/persist'
 import { getSymbolsForSection } from '../data/symbols'
 import { WorkspaceContext } from './WorkspaceContext'
 
-/**
- * Provedor do estado global do "workspace".
- *
- * Estado persistido (localStorage, via utils/persist.js):
- *  - tema, acento e zen mode;
- *  - abas abertas, aba ativa, painel e views da sidebar;
- *  - ordem das abas (quando houver split);
- *  - histórico de navegação.
- *
- * Estado efêmero (não persistido):
- *  - overlays (Quick Open, Command Palette, Go to Symbol, Search in File);
- *  - toasts/notificações.
- */
+// Gerencia o estado global do workspace (abas, tema, paineis)
 
 const DEFAULT_THEME = 'dark'
 const ACCENTS = ['blue', 'purple', 'green', 'orange', 'pink']
@@ -64,7 +52,7 @@ function sanitizePersisted(saved) {
   return {
     theme: saved.theme === 'light' ? 'light' : DEFAULT_THEME,
     accent: ACCENTS.includes(saved.accent) ? saved.accent : DEFAULT_ACCENT,
-    // Zen Mode não é restaurado ao recarregar: evita prender a UI sem Activity Bar.
+    // não restaura o Zen Mode para evitar travar a tela
     zen: false,
     explorerVisible: saved.explorerVisible !== false,
     explorerView:
@@ -154,7 +142,7 @@ export function WorkspaceProvider({ children }) {
   const activeId = activeGroup?.active ?? null
   const activeFile = activeId ? fileIndex[activeId] : null
 
-  /** Persistência centralizada do estado do workspace. */
+  // salva estado no localStorage
   useEffect(() => {
     saveState({
       theme,
@@ -186,7 +174,7 @@ export function WorkspaceProvider({ children }) {
     setPersisted((prev) => ({ ...prev, panelHeight: next }))
   }, [])
 
-  /** Aplica tema/acento no root para suportar tema claro/escuro e accent dinâmico. */
+  // aplica o tema e as cores de destaque no css global
   useEffect(() => {
     const root = document.documentElement
     root.dataset.theme = theme

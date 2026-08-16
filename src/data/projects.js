@@ -1,11 +1,5 @@
-/**
- * Projetos do portfólio — dados factuais obtidos dos repositórios oficiais
- * (GitHub API / README). Nada inventado.
- *
- * `authorship`: 'sole' (repo de João, única contribuição confirmada na API)
- *               ou 'team' (projeto colaborativo; participação sem autoria integral).
- * `role`: descrição factual da participação, quando diferente de autoria.
- */
+// dados reais dos projetos
+// authorship: 'sole' (projeto pessoal) ou 'team' (equipe)
 export const projects = [
   {
     id: 'analytics-dashboard',

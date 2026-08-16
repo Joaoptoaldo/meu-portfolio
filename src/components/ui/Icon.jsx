@@ -2,8 +2,6 @@
  * Ícones SVG inline próprio (sem bibliotecas).
  * Cada ícone é definido por nome; o componente injeta fill/stroke atuais.
  *
- * Uso: <Icon name="files" className="h-4 w-4" />
- * Cores por CSS (fill/stroke corrente) para respeitar temas e hover.
  */
 
 const PATHS = {

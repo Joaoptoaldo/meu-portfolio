@@ -1,9 +1,4 @@
-/**
- * Dicionário de comandos do Terminal interativo.
- * Cada comando usa ao máximo dados reais do portfólio (skills, projects,
- * experience, profile) — nenhuma informação profissional inventada.
- */
-/** Lista de comandos disponíveis, com descrição para o `help`. */
+// comandos disponiveis no terminal
 export const TERMINAL_COMMANDS = [
   { name: 'help', description: 'mostra a lista de comandos' },
   { name: 'whoami', description: 'exibe quem você está conhecendo' },

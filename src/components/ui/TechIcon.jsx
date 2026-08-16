@@ -4,8 +4,6 @@
  * Prioriza os ícones do skill-icons (pasta `skill/`, MIT), que possuem
  * visual de badge/tile de tecnologia; quando não há equivalente, usa o
  * SVG de fallback de `src/assets/icons/`.
- *
- * Uso: <TechIcon name="React" className="h-4 w-4" />
  */
 import { stackIcons } from '../../data/stackIcons'
 

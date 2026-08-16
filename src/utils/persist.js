@@ -1,14 +1,10 @@
 /**
- * Persistência do estado do workspace em localStorage.
- *
- * Guarda apenas preferências/estado não-derivável do código (tema, acento,
- * abas, painel, views, zen, reordenação de tabs). Valores inválidos/corrompidos
- * são descartados silenciosamente no parse.
+ * Salva e carrega as configurações do usuário no localStorage.
  */
 
 const KEY = 'joao-pedro.workspace'
 
-/** Serializa e grava o estado. */
+// salva o estado
 export function saveState(state) {
   try {
     localStorage.setItem(KEY, JSON.stringify(state))
@@ -17,7 +13,7 @@ export function saveState(state) {
   }
 }
 
-/** Lê e desserializa o estado; retorna `null` se ausente ou inválido. */
+// le o estado salvo
 export function loadState() {
   try {
     const raw = localStorage.getItem(KEY)
@@ -28,7 +24,7 @@ export function loadState() {
   }
 }
 
-/** Remove o estado salvo. */
+// limpa o estado
 export function clearState() {
   try {
     localStorage.removeItem(KEY)

@@ -1,17 +1,11 @@
 /**
- * SearchInFile (Ctrl/Cmd+F) — barra de busca dentro do arquivo ativo.
- *
- * Localiza e destaca ocorrências no conteúdo texto da seção renderizada
- * (body do editor), navega por elas (Enter/Shift+Enter) e permite
- * substituir quando aplicável. Fecha com Esc.
- *
- * Nota: os dados do portfólio são renderizados por componentes; esta busca
- * opera sobre o texto visível da seção ativa (mesma base das demais ferramentas).
+ * Barra de busca no arquivo ativo (Ctrl/Cmd+F).
+ * Localiza e destaca ocorrências, permite navegação e fechamento com Esc.
  */
 import { useEffect, useRef, useState } from 'react'
 import { useWorkspace } from '../../hooks/useWorkspace'
 
-/** Consulta o texto de um nó (ignora script/style). */
+/** Retorna texto de um nó, ignorando script/style. */
 function nodeText(node) {
   if (!node || node.nodeType !== Node.ELEMENT_NODE) return ''
   const clone = node.cloneNode(true)
@@ -28,12 +22,12 @@ export default function SearchInFile({ editorRef }) {
 
   const rootId = activeId ? `editor-content-${activeId}` : null
 
-  // Foco no input ao abrir.
+  // Foca no input ao abrir a busca.
   useEffect(() => {
     if (searchInFile) inputRef.current?.focus()
   }, [searchInFile])
 
-  // Reset ao mudar de arquivo.
+  // Reseta estado da busca ao mudar de arquivo.
   useEffect(() => {
     setQuery('')
     setMatches([])

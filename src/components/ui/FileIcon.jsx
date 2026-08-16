@@ -1,10 +1,6 @@
 /**
  * FileIcon — ícone de arquivo estilo editor.
  *
- * Prioriza os ícones de tecnologia (stacks) disponíveis na pasta `public/`
- * (/react-icon.svg, /js-icon.svg, /ts-icon.svg, /py-icon.svg) para os tipos
- * com correspondência no Explorer. Tipos sem correspondência direta em public/
- * (json, pasta) usam símbolos próprios inline ou fallback.
  */
 
 const PUBLIC_ICONS = {

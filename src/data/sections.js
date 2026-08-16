@@ -1,8 +1,6 @@
 import { projects } from './projects'
 
-/**
- * Converte um item de `projects.js` em um nó de arquivo para o Explorer.
- */
+// converte projeto em item da arvore do explorer
 export function getProjectFileNode(project) {
   let icon = project.icon
   if (!icon) {
@@ -89,10 +87,7 @@ export const workspaceTree = {
   ],
 }
 
-/**
- * Achata a árvore em uma lista plana de entradas abertáveis (com `section`).
- * Usado pelo contexto (fileIndex) e por quem precisar de uma lista simples.
- */
+// transforma a arvore em uma lista plana de arquivos
 export function flattenFiles(tree = workspaceTree) {
   const result = []
   const walk = (entries) => {
@@ -105,9 +100,9 @@ export function flattenFiles(tree = workspaceTree) {
   return result
 }
 
-/** Abas abertas ao iniciar (Welcome + Sobre). */
+// abas abertas por padrao
 export const initialOpened = ['welcome', 'sobre']
 
-/** Arquivo ativo ao iniciar. */
+// aba inicial
 export const initialActive = 'welcome'
 
