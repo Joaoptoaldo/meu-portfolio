@@ -7,8 +7,10 @@ import { profile } from './profile'
 
 export const welcomeStarter = [
   { id: 'sobre', label: 'Sobre mim' },
+  { id: 'habilidades', label: 'Ver habilidades' },
   { id: 'experiencia', label: 'Ver experiência' },
   { id: 'projetos', label: 'Ver projetos' },
+  { id: 'formacao', label: 'Ver formação' },
   { id: 'contato', label: 'Entrar em contato' },
 ]
 

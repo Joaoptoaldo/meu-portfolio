@@ -99,9 +99,13 @@ export function WorkspaceProvider({ children }) {
   const [theme, setTheme] = useState(() => persisted.theme ?? DEFAULT_THEME)
   const [accent, setAccent] = useState(() => persisted.accent ?? DEFAULT_ACCENT)
   const [zen, setZen] = useState(false)
-  const [explorerVisible, setExplorerVisible] = useState(
-    () => persisted.explorerVisible !== false,
-  )
+  const [explorerVisible, setExplorerVisible] = useState(() => {
+    // No mobile (< 640px) o drawer não abre sozinho na primeira carga:
+    // o conteúdo principal permanece visível e o Explorer só abre por
+    // interação do usuário. No desktop mantém o comportamento persistido.
+    if (typeof window !== 'undefined' && window.innerWidth < 640) return false
+    return persisted.explorerVisible !== false
+  })
   const [explorerView, setExplorerViewState] = useState(
     () => persisted.explorerView ?? 'explorer',
   )

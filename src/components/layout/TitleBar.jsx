@@ -9,11 +9,14 @@
  *
  * O seletor de seções para mobile entra na Etapa 16 (Responsividade).
  */
+import { useState } from 'react'
 import { useWorkspace } from '../../hooks/useWorkspace'
 import Icon from '../ui/Icon'
+import HelpOverlay from './HelpOverlay'
 
 export default function TitleBar() {
   const { activeFile, toggleExplorer, explorerVisible, restoreLayout } = useWorkspace()
+  const [helpOpen, setHelpOpen] = useState(false)
 
   return (
     <header className="relative flex h-9 shrink-0 items-center border-b border-border bg-bg-title">
@@ -58,6 +61,18 @@ export default function TitleBar() {
         </span>
       </div>
 
+      {/* Ajuda (?) */}
+      <button
+        type="button"
+        onClick={() => setHelpOpen(true)}
+        aria-label="Como navegar no portfólio"
+        aria-expanded={helpOpen}
+        title="Como navegar"
+        className="flex h-full w-9 shrink-0 items-center justify-center font-mono text-sm font-semibold text-text-secondary transition-colors hover:bg-bg-hover hover:text-text-primary"
+      >
+        ?
+      </button>
+
       {/* Botões de janela (decorativos) */}
       <div className="flex h-full shrink-0 items-center" aria-hidden="true">
         <span className="flex h-full w-11 items-center justify-center text-[11px] leading-none text-text-secondary">
@@ -70,6 +85,9 @@ export default function TitleBar() {
           ✕
         </span>
       </div>
+
+      {/* Painel "Como navegar" */}
+      <HelpOverlay open={helpOpen} onClose={() => setHelpOpen(false)} />
     </header>
   )
 }
