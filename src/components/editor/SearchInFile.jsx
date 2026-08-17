@@ -84,7 +84,7 @@ export default function SearchInFile({ editorRef }) {
 
   return (
     <div
-      className="fixed right-4 top-10 z-40 w-80 overflow-hidden rounded-md border border-border-strong bg-bg-title shadow-2xl"
+      className="fixed right-4 top-10 z-40 w-80 max-w-[calc(100vw-2rem)] overflow-hidden rounded-md border border-border-strong bg-bg-title shadow-2xl"
       onKeyDown={onKeyDown}
       role="dialog"
       aria-label="Buscar no arquivo"
