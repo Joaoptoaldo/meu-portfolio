@@ -15,8 +15,29 @@ import Icon from '../ui/Icon'
 import HelpOverlay from './HelpOverlay'
 
 export default function TitleBar() {
-  const { activeFile, toggleExplorer, explorerVisible, restoreLayout } = useWorkspace()
+  const {
+    activeFile,
+    toggleExplorer,
+    explorerVisible,
+    restoreLayout,
+    panelOpen,
+    panelView,
+    togglePanel,
+    selectPanelView,
+  } = useWorkspace()
   const [helpOpen, setHelpOpen] = useState(false)
+
+  function handleTerminalClick() {
+    if (!panelOpen) {
+      selectPanelView('terminal')
+    } else if (panelView === 'terminal') {
+      togglePanel()
+    } else {
+      selectPanelView('terminal')
+    }
+  }
+
+  const terminalActive = panelOpen && panelView === 'terminal'
 
   return (
     <header className="relative flex h-9 shrink-0 items-center border-b border-border bg-bg-title">
@@ -42,6 +63,37 @@ export default function TitleBar() {
         </button>
       </div>
 
+      {/* Botões de Ação na Header (Esquerda) */}
+      <div className="flex items-center gap-1">
+         {/* Botão Terminal */}
+        <button
+          type="button"
+          onClick={handleTerminalClick}
+          aria-label={terminalActive ? 'Fechar terminal' : 'Abrir terminal'}
+          aria-pressed={terminalActive}
+          title={terminalActive ? 'Fechar terminal (Ctrl+J)' : 'Abrir terminal (Ctrl+J)'}
+          className={`flex h-6 items-center gap-1.5 px-1.5 font-mono text-xs font-medium transition-colors hover:bg-bg-hover ${
+            terminalActive
+              ? 'text-accent'
+              : 'text-text-secondary hover:text-text-primary'
+          }`}
+        >
+          <span>Terminal</span>
+        </button>
+
+        {/* Botão Ajuda */}
+        <button
+          type="button"
+          onClick={() => setHelpOpen(true)}
+          aria-label="Ajuda — como navegar no portfólio"
+          aria-expanded={helpOpen}
+          title="Ajuda — como navegar"
+          className="ml-1 flex h-6 items-center gap-1 px-1.5 font-mono text-xs font-medium text-text-secondary transition-colors hover:bg-bg-hover hover:text-text-primary"
+        >
+          <span>Ajuda</span>
+        </button>
+      </div>
+
       {/* Identidade do workspace */}
       <div className="flex min-w-0 flex-1 items-center justify-center gap-2 px-3">
         <span
@@ -60,18 +112,6 @@ export default function TitleBar() {
           {activeFile?.description ?? ''}
         </span>
       </div>
-
-      {/* Ajuda (?) */}
-      <button
-        type="button"
-        onClick={() => setHelpOpen(true)}
-        aria-label="Como navegar no portfólio"
-        aria-expanded={helpOpen}
-        title="Como navegar"
-        className="flex h-full w-9 shrink-0 items-center justify-center font-mono text-sm font-semibold text-text-secondary transition-colors hover:bg-bg-hover hover:text-text-primary"
-      >
-        ?
-      </button>
 
       {/* Botões de janela (decorativos) */}
       <div className="flex h-full shrink-0 items-center" aria-hidden="true">

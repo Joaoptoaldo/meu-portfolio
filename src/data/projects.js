@@ -1,5 +1,73 @@
-// dados reais dos projetos
-// authorship: 'sole' (projeto pessoal) ou 'team' (equipe)
+/**
+ * Modelo de dados Orientado a Objetos para Projetos.
+ *
+ * Ao adicionar um novo projeto, altere APENAS este arquivo.
+ */
+
+export class Project {
+  /**
+   * @param {Object} data
+   * @param {string} data.id - Identificador único
+   * @param {string} [data.file] - Nome de arquivo simulado no editor
+   * @param {string} [data.icon] - Extensão/ícone visual do arquivo
+   * @param {string} data.title - Nome do projeto
+   * @param {string} data.tagline - Resumo/subtítulo
+   * @param {string} data.description - Descrição detalhada
+   * @param {Array<string>} [data.technologies=[]] - Lista de tecnologias
+   * @param {string} data.repository - URL do repositório GitHub
+   * @param {string} [data.demo] - URL da aplicação em produção (opcional)
+   * @param {'sole'|'team'} [data.authorship='sole'] - Tipo de autoria ('sole' | 'team')
+   * @param {string} [data.role] - Descrição da atuação (caso team)
+   */
+  constructor({
+    id,
+    file,
+    icon,
+    title,
+    tagline,
+    description,
+    technologies = [],
+    repository,
+    demo,
+    authorship = 'sole',
+    role,
+  }) {
+    this.id = id
+    this.file = file || `${id}.js`
+    this.icon = icon || 'js'
+    this.title = title
+    this.tagline = tagline
+    this.description = description
+    this.technologies = technologies
+    this.repository = repository
+    this.demo = demo
+    this.authorship = authorship
+    this.role = role
+  }
+
+  get isTeam() {
+    return this.authorship === 'team'
+  }
+
+  get authorshipLabel() {
+    return this.isTeam ? 'Colaboração' : 'Autor'
+  }
+
+  /**
+   * Retorna os dados em linhas pesquisáveis para a busca global.
+   */
+  toSearchableLines() {
+    return [
+      this.title,
+      this.tagline,
+      this.description,
+      ...this.technologies,
+      ...(this.role ? [this.role] : []),
+    ]
+  }
+}
+
+// Lista oficial de projetos convertida para instâncias da classe Project
 export const projects = [
   {
     id: 'analytics-dashboard',
@@ -125,4 +193,4 @@ export const projects = [
     repository: 'https://github.com/Joaoptoaldo/calorie-tracker',
     authorship: 'sole',
   },
-]
+].map((p) => new Project(p))

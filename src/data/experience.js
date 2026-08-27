@@ -1,6 +1,38 @@
 /**
- * Experiência — linha do tempo da trajetória.
- * Dados fornecidos pelo proprietário do projeto.
+ * Modelo de dados Orientado a Objetos para Experiências.
+ *
+ * Ao adicionar uma nova experiência, altere APENAS este arquivo.
+ */
+
+export class ExperienceItem {
+  /**
+   * @param {Object} data
+   * @param {string} data.id - Identificador único
+   * @param {string} data.role - Cargo/Função
+   * @param {string} data.company - Empresa/Instituição
+   * @param {string} data.period - Período de atuação (ex: '2026 — Presente')
+   * @param {string} data.description - Descrição das atividades e entregas
+   * @param {Array<string>} [data.technologies=[]] - Tecnologias utilizadas
+   */
+  constructor({ id, role, company, period, description, technologies = [] }) {
+    this.id = id
+    this.role = role
+    this.company = company
+    this.period = period
+    this.description = description
+    this.technologies = technologies
+  }
+
+  /**
+   * Retorna os dados em linhas pesquisáveis para a busca global.
+   */
+  toSearchableLines() {
+    return [this.period, this.role, this.company, this.description, ...this.technologies]
+  }
+}
+
+/**
+ * Trajetória de experiências profissionais do portfólio.
  */
 export const experience = {
   items: [
@@ -84,5 +116,5 @@ export const experience = {
         'Modelagem de Sistemas',
       ],
     },
-  ],
+  ].map((item) => new ExperienceItem(item)),
 }
