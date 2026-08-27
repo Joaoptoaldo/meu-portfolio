@@ -25,7 +25,7 @@ function Tab({ file, isActive, onActivate, onClose, onSplit, onDragStart, onDrag
       onDragOver={onDragOver}
       onDrop={onDrop}
       onClick={onActivate}
-      className={`group relative flex h-9 shrink-0 items-center gap-1.5 border-r border-border pl-3 pr-2 font-mono text-xs transition-colors ${
+      className={`group relative flex h-11 sm:h-9 shrink-0 items-center gap-2 sm:gap-1.5 border-r border-border pl-3 pr-2 font-mono text-sm sm:text-xs transition-colors ${
         isActive
           ? 'border-t-2 border-t-accent bg-bg-tab-active'
           : 'border-t-2 border-t-transparent bg-bg-tab'
@@ -46,7 +46,7 @@ function Tab({ file, isActive, onActivate, onClose, onSplit, onDragStart, onDrag
       </span>
       <FileIcon
         type={file.icon}
-        className={`h-3.5 w-3.5 transition-opacity ${
+        className={`h-4 w-4 sm:h-3.5 sm:w-3.5 transition-opacity ${
           isActive ? 'opacity-100' : 'opacity-80 group-hover:opacity-100'
         }`}
       />
@@ -58,7 +58,7 @@ function Tab({ file, isActive, onActivate, onClose, onSplit, onDragStart, onDrag
           e.stopPropagation()
           onSplit()
         }}
-        className="hidden h-4 w-4 cursor-pointer items-center justify-center rounded text-text-disabled opacity-0 transition-opacity hover:bg-bg-hover group-hover:flex group-hover:opacity-100"
+        className="hidden h-5 w-5 sm:h-4 sm:w-4 cursor-pointer items-center justify-center rounded text-text-disabled opacity-0 transition-opacity hover:bg-bg-hover group-hover:flex group-hover:opacity-100"
       >
         <Icon name="split" className="h-3 w-3" />
       </span>
@@ -77,9 +77,9 @@ function Tab({ file, isActive, onActivate, onClose, onSplit, onDragStart, onDrag
             onClose()
           }
         }}
-        className="flex h-4 w-4 cursor-pointer items-center justify-center rounded text-text-disabled opacity-0 transition-opacity group-hover:opacity-100 hover:bg-bg-hover focus-visible:opacity-100"
+        className="flex h-7 w-7 sm:h-4 sm:w-4 cursor-pointer items-center justify-center rounded text-text-disabled opacity-100 sm:opacity-0 transition-opacity group-hover:opacity-100 hover:bg-bg-hover focus-visible:opacity-100"
       >
-        <span className="text-[10px] leading-none">✕</span>
+        <span className="text-xs sm:text-[10px] leading-none">✕</span>
       </span>
     </button>
   )
@@ -132,7 +132,13 @@ export default function TabBar({ groupId = null }) {
   }
 
   return (
-    <div className="flex items-stretch border-b border-border bg-bg-title">
+    <div className="relative flex items-stretch border-b border-border bg-bg-title">
+      {/* Indicador visual de scroll à esquerda */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute left-0 top-0 bottom-0 z-10 w-4 bg-gradient-to-r from-bg-title to-transparent opacity-0 transition-opacity sm:hidden"
+      />
+
       <div
         role="tablist"
         aria-label="Arquivos abertos"
@@ -168,11 +174,17 @@ export default function TabBar({ groupId = null }) {
         })}
       </div>
 
+      {/* Indicador visual de scroll à direita no mobile */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute right-9 top-0 bottom-0 z-10 w-6 bg-gradient-to-l from-bg-title to-transparent sm:hidden"
+      />
+
       <button
         type="button"
         onClick={() => openFileInGroup('welcome', id)}
         aria-label="Abrir nova aba (Welcome)"
-        className="flex h-9 w-9 shrink-0 items-center justify-center border-l border-border text-lg leading-none text-text-muted transition-colors hover:bg-bg-hover hover:text-text-primary"
+        className="flex h-11 w-11 sm:h-9 sm:w-9 shrink-0 items-center justify-center border-l border-border text-lg leading-none text-text-muted transition-colors hover:bg-bg-hover hover:text-text-primary"
       >
         +
       </button>

@@ -17,7 +17,7 @@ export default function Experience() {
   const { openFile } = useWorkspace()
 
   return (
-    <div className="mx-auto min-w-0 w-full max-w-6xl px-6 pt-6 pb-12 md:px-8 md:pt-8 md:pb-16">
+    <div className="mx-auto min-w-0 w-full max-w-5xl px-6 pt-6 pb-12 md:px-8 md:pt-8 md:pb-16">
       <header className="mb-6">
         <p className="mb-1 font-mono text-xs uppercase tracking-widest text-text-muted">
           // experiencia.jsx

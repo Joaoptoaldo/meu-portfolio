@@ -23,14 +23,14 @@ export default function Welcome() {
   const recent = openTabs.slice(-4).reverse()
 
   return (
-    <div className="mx-auto flex min-w-0 w-full max-w-5xl flex-col gap-6 px-6 pt-6 pb-12 md:px-8 md:pt-8 md:pb-16">
+    <div className="mx-auto flex min-w-0 w-full max-w-4xl flex-col gap-6 px-6 pt-6 pb-12 md:px-8 md:pt-8 md:pb-16">
       <section>
         <p className="mb-2 font-mono text-sm text-text-muted">{'>'}</p>
         <h1 className="text-3xl font-bold leading-tight text-text-primary">
           Olá, eu sou <span className="text-accent-bright">{profile.firstName}</span>
         </h1>
         <p className="mt-1 font-mono text-sm text-text-secondary">
-          {profile.role} — {profile.formation}
+          {profile.role} - {profile.formation}
         </p>
         <p className="mt-3 max-w-2xl text-sm leading-relaxed text-text-secondary">
           {profile.summary}
@@ -79,7 +79,7 @@ export default function Welcome() {
                 >
                   <span className="min-w-0 flex-1 truncate">
                     {item.label}{' '}
-                    <span className="text-text-muted">— {item.value}</span>
+                    <span className="text-text-muted">{item.value}</span>
                   </span>
                   <span aria-hidden="true" className="shrink-0 pl-1 text-text-disabled">↗</span>
                 </a>
