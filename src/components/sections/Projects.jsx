@@ -21,8 +21,6 @@ function TechChip({ name }) {
 }
 
 function ProjectCard({ project }) {
-  const isTeam = project.authorship === 'team'
-
   return (
     <article
       id={`project-${project.id}`}
@@ -40,12 +38,12 @@ function ProjectCard({ project }) {
             </h2>
             <span
               className={`shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-medium ${
-                isTeam
+                project.isTeam
                   ? 'border-accent-border bg-bg-tag text-accent-bright'
                   : 'border-border-strong bg-bg-hover text-text-secondary'
               }`}
             >
-              {isTeam ? 'Colaboração' : 'Autor'}
+              {project.authorshipLabel}
             </span>
           </span>
           <p className="mt-1 text-xs text-text-muted">{project.tagline}</p>
@@ -55,7 +53,7 @@ function ProjectCard({ project }) {
           {project.description}
         </p>
 
-        {isTeam && project.role && (
+        {project.isTeam && project.role && (
           <p className="mt-2.5 rounded border border-border bg-bg-hover px-2.5 py-1.5 font-mono text-[11px] leading-relaxed text-text-muted">
             {project.role}
           </p>

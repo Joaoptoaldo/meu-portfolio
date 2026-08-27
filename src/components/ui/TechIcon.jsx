@@ -22,13 +22,15 @@ const LOGOS = import.meta.glob('../../assets/icons/skill*.svg', {
 
 export default function TechIcon({ name, className = 'h-4 w-4', title }) {
   const meta = stackIcons[name]
-  if (!meta) return null
 
-  // Prioridade 1: ícone do skill-icons; 2: asset de fallback.
-  const skillUrl = meta.skill
-    ? SKILL_LOGOS[`../../assets/icons/skill/${meta.skill}.svg`]
-    : null
-  const url = skillUrl ?? LOGOS[`../../assets/icons/skill/${meta.file}.svg`]
+  const skillName = meta?.skill ?? name.replace(/[^a-zA-Z0-9]/g, '')
+  const fileName = meta?.file ?? name.toLowerCase().replace(/[^a-zA-Z0-9]/g, '')
+
+  const skillUrl = SKILL_LOGOS[`../../assets/icons/skill/${skillName}.svg`]
+    ?? SKILL_LOGOS[`../../assets/icons/skill/${name}.svg`]
+
+  const url = skillUrl ?? LOGOS[`../../assets/icons/skill/${fileName}.svg`]
+
   if (!url) return null
 
   return (

@@ -13,8 +13,77 @@
  * IMPORTANTE: os valores abaixo são SUGERIDOS a partir dos projetos reais do
  * portfólio e da rúbrica — ajuste segundo sua própria avaliação.
  */
+/**
+ * Modelo de dados Orientado a Objetos para Habilidades (Skills).
+ *
+ * Ao adicionar uma nova habilidade, APENAS este arquivo é alterado.
+ * Os componentes visuais, busca e ícones funcionam automaticamente por convenção.
+ */
+
+/**
+ * Entidade que representa uma Habilidade individual.
+ */
+export class Skill {
+  /**
+   * @param {Object} data
+   * @param {string} data.name - Nome da tecnologia (ex: 'React', 'Python')
+   * @param {number} [data.progress=0] - Autoavaliação de 0 a 100
+   * @param {'use'|'learning'} [data.level] - Nível visual ('use' | 'learning')
+   * @param {string} [data.icon] - Nome do ícone SVG customizado se diferente do padrão (opcional)
+   */
+  constructor({ name, progress = 0, level, icon }) {
+    this.name = name
+    this.progress = Math.max(0, Math.min(100, Number(progress) || 0))
+    this.level = level
+    this.icon = icon
+  }
+
+  /**
+   * Retorna a classificação da rúbrica baseada no progresso.
+   */
+  get rubricLabel() {
+    if (this.progress >= 85) return 'avançado'
+    if (this.progress >= 65) return 'autônomo'
+    if (this.progress >= 45) return 'com apoio'
+    return 'explorando'
+  }
+}
+
+/**
+ * Entidade que representa uma Categoria de Habilidades.
+ */
+export class SkillCategory {
+  /**
+   * @param {Object} data
+   * @param {string} data.id - Identificador único (ex: 'frontend')
+   * @param {string} data.title - Título exibido na interface
+   * @param {boolean} [data.isLearning=false] - Se indica a categoria de aprendizado
+   * @param {Array<Object|Skill>} [data.skills=[]] - Lista de habilidades
+   */
+  constructor({ id, title, isLearning = false, skills = [] }) {
+    this.id = id
+    this.title = title
+    this.isLearning = isLearning
+    this.skills = skills.map((s) => (s instanceof Skill ? s : new Skill(s)))
+  }
+
+  /**
+   * Adiciona uma nova habilidade a esta categoria.
+   * @param {Object|Skill} skillData
+   * @returns {SkillCategory} Retorna a própria categoria (interface fluente)
+   */
+  addSkill(skillData) {
+    const skill = skillData instanceof Skill ? skillData : new Skill(skillData)
+    this.skills.push(skill)
+    return this
+  }
+}
+
+/**
+ * Coleção principal de categorias de habilidades do portfólio.
+ */
 export const skillCategories = [
-  {
+  new SkillCategory({
     id: 'learning',
     title: 'Aprofundando conhecimentos',
     isLearning: true,
@@ -23,8 +92,8 @@ export const skillCategories = [
       { name: 'C#', level: 'learning', progress: 30 },
       { name: 'ASP.NET Core', level: 'learning', progress: 15 },
     ],
-  },
-  {
+  }),
+  new SkillCategory({
     id: 'languages',
     title: 'Linguagens',
     skills: [
@@ -33,8 +102,8 @@ export const skillCategories = [
       { name: 'Python', progress: 80 },
       { name: 'Java', progress: 40 },
     ],
-  },
-  {
+  }),
+  new SkillCategory({
     id: 'frontend',
     title: 'Frontend',
     skills: [
@@ -43,8 +112,8 @@ export const skillCategories = [
       { name: 'HTML', progress: 90 },
       { name: 'CSS', progress: 80 },
     ],
-  },
-  {
+  }),
+  new SkillCategory({
     id: 'backend',
     title: 'Backend',
     skills: [
@@ -53,8 +122,8 @@ export const skillCategories = [
       { name: 'FastAPI', progress: 60 },
       { name: 'Django', progress: 70 },
     ],
-  },
-  {
+  }),
+  new SkillCategory({
     id: 'database',
     title: 'Banco de Dados',
     skills: [
@@ -63,8 +132,8 @@ export const skillCategories = [
       { name: 'MongoDB', progress: 75 },
       { name: 'SQLite', progress: 65 },
     ],
-  },
-  {
+  }),
+  new SkillCategory({
     id: 'tools',
     title: 'Ferramentas',
     skills: [
@@ -77,5 +146,5 @@ export const skillCategories = [
       { name: 'Bootstrap', progress: 80 },
       { name: 'Figma', progress: 55 },
     ],
-  },
+  }),
 ]

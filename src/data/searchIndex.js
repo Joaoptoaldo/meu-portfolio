@@ -23,9 +23,6 @@ const welcomeText = [
   profile.summary,
 ]
 
-/** Canais de contato (label + valor + dica). */
-const contactText = contact.channels.flatMap((c) => [c.label, c.value, c.hint])
-
 /** Linhas de um bloco de experiência. */
 function experienceLines(item) {
   return [item.period, item.role, item.company, item.description]
@@ -61,31 +58,39 @@ export const searchIndex = [
     section: 'projects',
     fileId: 'projetos',
     label: `${p.title} — projetos/`,
-    lines: [
-      p.title,
-      p.tagline,
-      p.description,
-      ...p.technologies,
-      ...(p.role ? [p.role] : []),
-    ],
+    lines: typeof p.toSearchableLines === 'function'
+      ? p.toSearchableLines()
+      : [p.title, p.tagline, p.description, ...p.technologies],
   })),
   {
     section: 'experience',
     fileId: 'experiencia',
     label: 'experiencia.jsx',
-    lines: experience.items.flatMap(experienceLines),
+    lines: experience.items.flatMap((item) =>
+      typeof item.toSearchableLines === 'function'
+        ? item.toSearchableLines()
+        : experienceLines(item)
+    ),
   },
   {
     section: 'education',
     fileId: 'formacao',
     label: 'formacao.jsx',
-    lines: education.items.flatMap((e) => [e.title, e.institution, e.duration]),
+    lines: education.items.flatMap((e) =>
+      typeof e.toSearchableLines === 'function'
+        ? e.toSearchableLines()
+        : [e.title, e.institution, e.duration]
+    ),
   },
   {
     section: 'contact',
     fileId: 'contato',
     label: 'contato.jsx',
-    lines: contactText.filter(Boolean),
+    lines: contact.channels.flatMap((c) =>
+      typeof c.toSearchableLines === 'function'
+        ? c.toSearchableLines()
+        : [c.label, c.value, c.hint]
+    ).filter(Boolean),
   },
 ]
 
