@@ -8,14 +8,61 @@
       name="description"
       content="Portfólio de João Pedro Toaldo — Desenvolvedor de Software. Estudante de Sistemas de Informação na Universidade Franciscana (UFN)."
     />
+
+    <!-- DNS Prefetch para recursos externos -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+
+    <!-- Preconnect para conexões críticas -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Preload de fontes críticas (Inter para texto) -->
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      as="style"
+    />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
+
+    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Preload do CSS crítico -->
+    <link rel="preload" href="/src/index.css" as="style" />
+
     <title>João Pedro Toaldo | Desenvolvedor de Software</title>
+
+    <!-- CSS crítico inline para FCP mais rápido -->
+    <style>
+      /* Prevenir flash of unstyled content */
+      body {
+        margin: 0;
+        background-color: #0a0b10;
+        color: #e6e8f0;
+        font-family: "Inter", system-ui, -apple-system, sans-serif;
+      }
+
+      /* Loading indicator */
+      #root:empty::after {
+        content: "";
+        display: block;
+        width: 40px;
+        height: 40px;
+        margin: calc(50vh - 20px) auto;
+        border: 3px solid rgba(77, 170, 252, 0.2);
+        border-top-color: #4daafc;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+      }
+
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>

@@ -1,6 +1,9 @@
+import { Suspense, lazy } from 'react'
 import { useWorkspace } from '../../hooks/useWorkspace'
 import { useResize } from '../../hooks/useResize'
-import Terminal from './Terminal'
+
+// Lazy loading do Terminal (componente pesado)
+const Terminal = lazy(() => import('./Terminal'))
 
 const VIEWS = [
   { id: 'problems', label: 'PROBLEMS' },
@@ -109,7 +112,13 @@ export default function Panel() {
       </div>
 
       <div className="min-h-0 flex-1 overflow-y-auto">
-        <View />
+        <Suspense fallback={
+          <div className="flex h-full items-center justify-center p-4">
+            <div className="h-5 w-5 animate-spin rounded-full border-2 border-accent border-t-transparent" />
+          </div>
+        }>
+          <View />
+        </Suspense>
       </div>
     </section>
   )
