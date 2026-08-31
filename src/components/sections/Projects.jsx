@@ -71,7 +71,8 @@ function ProjectCard({ project }) {
           href={project.repository}
           target="_blank"
           rel="noreferrer"
-          className="text-accent transition-colors hover:text-accent-bright hover:underline"
+          aria-label={`Ver repositório do projeto ${project.title} no GitHub (abre em nova aba)`}
+          className="text-accent transition-colors hover:text-accent-bright hover:underline focus-visible:outline-2 focus-visible:outline-accent"
         >
           github ↗
         </a>
@@ -80,7 +81,8 @@ function ProjectCard({ project }) {
             href={project.demo}
             target="_blank"
             rel="noreferrer"
-            className="text-accent transition-colors hover:text-accent-bright hover:underline"
+            aria-label={`Ver aplicação em produção do projeto ${project.title} (abre em nova aba)`}
+            className="text-accent transition-colors hover:text-accent-bright hover:underline focus-visible:outline-2 focus-visible:outline-accent"
           >
             demo ↗
           </a>

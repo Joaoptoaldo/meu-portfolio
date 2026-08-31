@@ -37,8 +37,10 @@ function BottomItem({ action }) {
   )
 }
 
-export default function MobileNav() {
+export default function MobileNav({ hidden = false }) {
   const mobileActions = activityActions.filter((a) => a.mobile)
+
+  if (hidden) return null
 
   return (
     <nav

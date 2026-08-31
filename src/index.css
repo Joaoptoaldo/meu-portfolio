@@ -21,7 +21,7 @@
   /* Texto */
   --color-text-primary: #e6e8f0;
   --color-text-secondary: #9aa3b2;
-  --color-text-muted: #6b7280;
+  --color-text-muted: #8b929c;
   --color-text-disabled: #4b5563;
 
   /* Accent azul-elétrico */
@@ -184,6 +184,11 @@
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     overflow: hidden;
+    /* Safe area para dispositivos com notch/dynamic island */
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
   }
 
   :root[data-theme="light"] body {

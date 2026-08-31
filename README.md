@@ -40,7 +40,7 @@ A aplicação transforma a apresentação do meu perfil profissional em uma expe
   - **Go to Symbol (`Ctrl+Shift+O` / `Cmd+Shift+O`)**: Modal para navegação rápida entre símbolos e seletores do arquivo ativo.
   - **Search in File (`Ctrl+F`)**: Modal de busca textual filtrada dentro do arquivo atualmente aberto.
 - **Busca Global (`Ctrl+Shift+F`)**: Painel na sidebar que permite pesquisar termos em todos os arquivos/seções do portfólio, com navegação direta para os resultados.
-- **Source Control / Git (`ScmView`)**: Painel na sidebar que exibe a lista dos commits reais obtidos do histórico do repositório (`git log`), apresentando a mensagem, o hash curto, a data e o nome do branch atual (`master`). *(Nota: exibe o histórico real de commits, sem funcionalidades de staging, commit ou diff de código).*
+- **Source Control / Git (`ScmView`)**: Painel na sidebar que exibe a lista dos commits reais obtidos do histórico do repositório (`git log`), apresentando a mensagem, o hash curto, a data e o nome do branch atual. *(Nota: exibe o histórico real de commits, sem funcionalidades de staging, commit ou diff de código).*
 
 ### Personalização e Estado
 - **Temas e Acento de Cor**: Suporte a 2 temas (`dark` por padrão e `light`) e 5 cores de destaque (*blue*, *purple*, *green*, *orange*, *pink*).
@@ -68,19 +68,22 @@ O projeto é desenvolvido com as seguintes tecnologias e versões exatas declara
 ## Estrutura do Projeto
 
 ```text
-meu-portfolio-profissional/
+meu-portfolio/
 ├── public/                # Favicon e ícones vetoriais estáticos (SVG)
 ├── src/
-│   ├── assets/            # Ícones das linguagens e tecnologias
+│   ├── assets/
+│   │   └── icons/         # Ícones das linguagens e tecnologias (SVGs individuais)
 │   ├── components/
-│   │   ├── editor/        # Componentes do editor (TabBar, Breadcrumb, CommandPalette, QuickOpen, GoToSymbol, SearchInFile)
-│   │   ├── layout/        # Componentes de layout da IDE (TitleBar, ActivityBar, Explorer, Panel, Terminal, ScmView, SearchView, SettingsOverlay, StatusBar, Toasts, Workspace)
-│   │   ├── sections/      # Renderizadores das seções de conteúdo (Welcome, About, Skills, Projects, Experience, Education, Contact)
+│   │   ├── editor/        # Componentes do editor (TabBar, Breadcrumb, CommandPalette, QuickOpen, GoToSymbol, SearchInFile, Palette, Editor)
+│   │   ├── layout/
+│   │   │   ├── explorer/  # Subcomponentes do Explorer (ContextMenu, OpenEditors, ExplorerBody, MobileDrawer, TreeNode)
+│   │   │   └── *.jsx      # Componentes de layout (TitleBar, ActivityBar, Explorer, Panel, Terminal, ScmView, SearchView, SettingsOverlay, StatusBar, Toasts, Workspace, HelpOverlay, MobileNav)
+│   │   ├── sections/      # Renderizadores das seções (Welcome, About, Skills, Projects, Experience, Education, Contact)
 │   │   └── ui/            # Componentes de interface base (FileIcon, TechIcon, Icon)
 │   ├── context/           # Estado global do workspace (WorkspaceProvider, WorkspaceContext)
-│   ├── data/              # Dados factuais do portfólio (projects.js, profile.js, skills.js, experience.js, education.js, contact.js, sections.js, commits.js, terminal.js, symbols.js, searchIndex.js)
-│   ├── hooks/             # Custom React Hooks (useWorkspace, useGlobalShortcuts)
-│   ├── utils/             # Funções utilitárias de persistência e busca (persist.js, fuzzy.js)
+│   ├── data/              # Dados factuais do portfólio (projects.js, profile.js, skills.js, experience.js, education.js, contact.js, sections.js, commits.js, terminal.js, symbols.js, searchIndex.js, about.js, welcome.js, stackIcons.js, activity.js)
+│   ├── hooks/             # Custom React Hooks (useWorkspace, useGlobalShortcuts, useClock, useMediaQuery, useResize)
+│   ├── utils/             # Funções utilitárias (persist.js, fuzzy.js)
 │   ├── App.jsx            # Componente raiz da aplicação
 │   ├── main.jsx           # Ponto de entrada React
 │   └── index.css          # Estilos globais e tokens Tailwind CSS v4
@@ -102,8 +105,8 @@ meu-portfolio-profissional/
 
 1. **Clonar o repositório:**
    ```bash
-   git clone https://github.com/Joaoptoaldo/meu-portfolio-profissional.git
-   cd meu-portfolio-profissional
+   git clone https://github.com/Joaoptoaldo/meu-portfolio.git
+   cd meu-portfolio
    ```
 
 2. **Instalar as dependências:**

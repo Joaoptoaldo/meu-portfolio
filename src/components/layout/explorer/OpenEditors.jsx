@@ -37,18 +37,18 @@ export default function OpenEditors() {
                   <FileIcon type={file.icon} className="h-3.5 w-3.5 shrink-0" />
                   <span className="truncate font-mono text-xs">{file.file}</span>
                 </button>
-                <span
-                  role="button"
+                <button
+                  type="button"
                   tabIndex={-1}
                   aria-label={`Fechar aba ${file.file}`}
                   onClick={(e) => {
                     e.stopPropagation()
                     closeTab(id)
                   }}
-                  className="flex h-4 w-4 shrink-0 cursor-pointer items-center justify-center rounded text-text-disabled opacity-0 transition-opacity hover:bg-bg-hover group-hover:opacity-100"
+                  className="flex h-4 w-4 shrink-0 items-center justify-center rounded text-text-disabled opacity-0 transition-opacity hover:bg-bg-hover group-hover:opacity-100"
                 >
                   <span className="text-[10px] leading-none">✕</span>
-                </span>
+                </button>
               </div>
             </li>
           )

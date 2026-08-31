@@ -40,7 +40,7 @@ export default function TitleBar() {
   const terminalActive = panelOpen && panelView === 'terminal'
 
   return (
-    <header className="relative flex h-9 shrink-0 items-center border-b border-border bg-bg-title">
+    <header className="relative flex h-10 sm:h-9 shrink-0 items-center border-b border-border bg-bg-title">
       {/* Ação real "Arquivos" no mobile (abre o drawer); decorativo no desktop */}
       <div className="flex w-[var(--spacing-activitybar)] shrink-0 items-center justify-center">
         <button
@@ -48,9 +48,9 @@ export default function TitleBar() {
           onClick={toggleExplorer}
           aria-label="Explorer (arquivos do portfólio)"
           aria-expanded={explorerVisible}
-          className="flex h-9 w-full items-center justify-center text-text-secondary transition-colors hover:bg-bg-hover hover:text-text-primary sm:hidden"
+          className="flex h-10 sm:h-9 w-full items-center justify-center text-text-secondary transition-colors hover:bg-bg-hover hover:text-text-primary sm:hidden"
         >
-          <Icon name="files" className="h-4 w-4" />
+          <Icon name="files" className="h-5 w-5 sm:h-4 sm:w-4" />
         </button>
         <button
           type="button"
@@ -63,8 +63,8 @@ export default function TitleBar() {
         </button>
       </div>
 
-      {/* Botões de Ação na Header (Esquerda) */}
-      <div className="flex items-center gap-1">
+      {/* Botões de Ação na Header (Esquerda) - responsivos para mobile */}
+      <div className="flex items-center gap-1 sm:gap-1 overflow-x-auto scrollbar-hidden">
          {/* Botão Terminal */}
         <button
           type="button"
@@ -72,13 +72,14 @@ export default function TitleBar() {
           aria-label={terminalActive ? 'Fechar terminal' : 'Abrir terminal'}
           aria-pressed={terminalActive}
           title={terminalActive ? 'Fechar terminal (Ctrl+J)' : 'Abrir terminal (Ctrl+J)'}
-          className={`flex h-6 items-center gap-1.5 px-1.5 font-mono text-xs font-medium transition-colors hover:bg-bg-hover ${
+          className={`flex h-8 sm:h-6 min-w-[36px] sm:min-w-0 items-center justify-center sm:justify-start gap-1.5 px-2 sm:px-1.5 font-mono text-xs font-medium transition-colors hover:bg-bg-hover ${
             terminalActive
               ? 'text-accent'
               : 'text-text-secondary hover:text-text-primary'
           }`}
         >
-          <span>Terminal</span>
+          <span className="hidden sm:inline">Terminal</span>
+          <span className="sm:hidden" aria-hidden="true">&gt;_</span>
         </button>
 
         {/* Botão Ajuda */}
@@ -88,24 +89,42 @@ export default function TitleBar() {
           aria-label="Ajuda — como navegar no portfólio"
           aria-expanded={helpOpen}
           title="Ajuda — como navegar"
-          className="ml-1 flex h-6 items-center gap-1 px-1.5 font-mono text-xs font-medium text-text-secondary transition-colors hover:bg-bg-hover hover:text-text-primary"
+          className="flex h-8 sm:h-6 min-w-[36px] sm:min-w-0 items-center justify-center sm:justify-start gap-1 px-2 sm:px-1.5 font-mono text-xs font-medium text-text-secondary transition-colors hover:bg-bg-hover hover:text-text-primary"
         >
-          <span>Ajuda</span>
+          <span className="hidden sm:inline">Ajuda</span>
+          <span className="sm:hidden" aria-hidden="true">?</span>
+        </button>
+
+        {/* Botão Download CV */}
+        <button
+          type="button"
+          onClick={() => {
+            const link = document.createElement('a')
+            link.href = '/cv/Profile.pdf'
+            link.download = 'JoaoPedro_Curriculo.pdf'
+            link.click()
+          }}
+          aria-label="Baixar currículo em PDF"
+          title="Baixar currículo (PDF)"
+          className="flex h-8 sm:h-6 min-w-[36px] sm:min-w-0 items-center justify-center sm:justify-start gap-1 px-2 sm:px-1.5 font-mono text-xs font-medium text-text-secondary transition-colors hover:bg-bg-hover hover:text-text-primary"
+        >
+          <Icon name="download" className="h-4 w-4 sm:h-3.5 sm:w-3.5" />
+          <span className="hidden sm:inline">CV</span>
         </button>
       </div>
 
       {/* Identidade do workspace */}
-      <div className="flex min-w-0 flex-1 items-center justify-center gap-2 px-3">
+      <div className="flex min-w-0 flex-1 items-center justify-center gap-1.5 sm:gap-2 px-2 sm:px-3">
         <span
           aria-hidden="true"
-          className="font-mono text-[13px] font-semibold text-accent"
+          className="font-mono text-[12px] sm:text-[13px] font-semibold text-accent"
         >
           {'</>'}
         </span>
-        <span className="truncate font-mono text-xs text-text-secondary">
+        <span className="truncate font-mono text-[11px] sm:text-xs text-text-secondary">
           joao-pedro.jsx
         </span>
-        <span aria-hidden="true" className="text-text-disabled">
+        <span aria-hidden="true" className="hidden sm:inline text-text-disabled">
           ·
         </span>
         <span className="hidden truncate text-xs text-text-muted md:inline">
@@ -113,8 +132,8 @@ export default function TitleBar() {
         </span>
       </div>
 
-      {/* Botões de janela (decorativos) */}
-      <div className="flex h-full shrink-0 items-center" aria-hidden="true">
+      {/* Botões de janela (decorativos) - ocultos em mobile para economizar espaço */}
+      <div className="hidden sm:flex h-full shrink-0 items-center" aria-hidden="true">
         <span className="flex h-full w-11 items-center justify-center text-[11px] leading-none text-text-secondary">
           —
         </span>
