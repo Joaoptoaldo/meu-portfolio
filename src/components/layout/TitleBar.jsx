@@ -92,6 +92,23 @@ export default function TitleBar() {
         >
           <span>Ajuda</span>
         </button>
+
+        {/* Botão Download CV */}
+        <button
+          type="button"
+          onClick={() => {
+            const link = document.createElement('a')
+            link.href = '/cv/Profile.pdf'
+            link.download = 'JoaoPedro_Curriculo.pdf'
+            link.click()
+          }}
+          aria-label="Baixar currículo em PDF"
+          title="Baixar currículo (PDF)"
+          className="ml-1 flex h-6 items-center gap-1 px-1.5 font-mono text-xs font-medium text-text-secondary transition-colors hover:bg-bg-hover hover:text-text-primary"
+        >
+          <Icon name="download" className="h-3.5 w-3.5" />
+          <span>CV</span>
+        </button>
       </div>
 
       {/* Identidade do workspace */}
