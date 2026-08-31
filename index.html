@@ -9,50 +9,61 @@
       content="Portfólio de João Pedro Toaldo — Desenvolvedor de Software. Estudante de Sistemas de Informação na Universidade Franciscana (UFN)."
     />
 
-    <!-- DNS Prefetch para recursos externos -->
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
-
-    <!-- Preconnect para conexões críticas -->
+    <!-- Preconnect para conexões críticas (inclui DNS lookup) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-    <!-- Preload de fontes críticas (Inter para texto) -->
+    <!-- Fontes: preload da CSS combinada com display=optional para evitar CLS de font-switching -->
     <link
       rel="preload"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=optional"
       as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
     />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=optional"
+        rel="stylesheet"
+      />
+    </noscript>
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <!-- Preload do CSS crítico -->
-    <link rel="preload" href="/src/index.css" as="style" />
-
     <title>João Pedro Toaldo | Desenvolvedor de Software</title>
 
-    <!-- CSS crítico inline para FCP mais rápido -->
+    <!-- CSS crítico inline — evita render-blocking e CLS -->
     <style>
       /* Prevenir flash of unstyled content */
+      html, body, #root {
+        height: 100%;
+      }
       body {
         margin: 0;
         background-color: #0a0b10;
         color: #e6e8f0;
         font-family: "Inter", system-ui, -apple-system, sans-serif;
+        color-scheme: dark;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        overflow: hidden;
+        /* Safe area para dispositivos com notch/dynamic island */
+        padding-top: env(safe-area-inset-top);
+        padding-bottom: env(safe-area-inset-bottom);
+        padding-left: env(safe-area-inset-left);
+        padding-right: env(safe-area-inset-right);
       }
 
-      /* Loading indicator */
-      #root:empty::after {
+      /* Loading indicator, evita CLS ao não depender de :empty */
+      #root:empty {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      #root:empty::before {
         content: "";
-        display: block;
         width: 40px;
         height: 40px;
-        margin: calc(50vh - 20px) auto;
         border: 3px solid rgba(77, 170, 252, 0.2);
         border-top-color: #4daafc;
         border-radius: 50%;
