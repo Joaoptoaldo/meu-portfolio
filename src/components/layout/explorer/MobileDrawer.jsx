@@ -78,7 +78,7 @@ export default function MobileDrawer({ onNavigate }) {
         className="animate-drawer-backdrop fixed inset-0 z-30 cursor-default bg-black/50"
       />
       {/* Painel lateral (slide-in da esquerda) - maior em tablet */}
-      <aside
+      <div
         ref={panelRef}
         role="dialog"
         aria-modal="true"
@@ -106,7 +106,7 @@ export default function MobileDrawer({ onNavigate }) {
         ) : (
           <ExplorerBody onNavigate={onNavigate} />
         )}
-      </aside>
+      </div>
     </div>
   )
 }

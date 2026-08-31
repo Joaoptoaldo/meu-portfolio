@@ -30,7 +30,7 @@ function EditorGroups() {
   const { groups, setActiveGroup, closeGroup, zen } = useWorkspace()
 
   return (
-    <section className="flex min-h-0 min-w-0 flex-1 bg-bg-editor">
+    <main className="flex min-h-0 min-w-0 flex-1 bg-bg-editor">
       {groups.map((group, i) => (
         <section
           key={group.id}
@@ -57,7 +57,7 @@ function EditorGroups() {
           <Editor groupId={group.id} column={i} />
         </section>
       ))}
-    </section>
+    </main>
   )
 }
 
