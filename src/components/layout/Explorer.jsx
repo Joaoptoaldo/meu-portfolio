@@ -33,6 +33,7 @@ export default function Explorer() {
       {/* Desktop/Tablet: painel com largura arrastável por mouse */}
       {explorerVisible && (
         <aside
+          aria-label="Explorer"
           style={{ width: `${width}px` }}
           className="relative hidden shrink-0 flex-col border-r border-border bg-bg-side sm:flex"
         >

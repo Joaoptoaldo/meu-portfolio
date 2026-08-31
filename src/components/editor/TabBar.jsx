@@ -50,37 +50,30 @@ function Tab({ file, isActive, onActivate, onClose, onSplit, onDragStart, onDrag
           isActive ? 'opacity-100' : 'opacity-80 group-hover:opacity-100'
         }`}
       />
-      <span
-        role="button"
+      <button
+        type="button"
         tabIndex={-1}
         aria-label={`Abrir ${file.file} ao lado`}
         onClick={(e) => {
           e.stopPropagation()
           onSplit()
         }}
-        className="hidden h-5 w-5 sm:h-4 sm:w-4 cursor-pointer items-center justify-center rounded text-text-disabled opacity-0 transition-opacity hover:bg-bg-hover group-hover:flex group-hover:opacity-100"
+        className="hidden h-5 w-5 sm:h-4 sm:w-4 items-center justify-center rounded text-text-disabled opacity-0 transition-opacity hover:bg-bg-hover group-hover:flex group-hover:opacity-100"
       >
         <Icon name="split" className="h-3 w-3" />
-      </span>
-      <span
-        role="button"
+      </button>
+      <button
+        type="button"
         tabIndex={-1}
         aria-label={`Fechar aba ${file.file}`}
         onClick={(e) => {
           e.stopPropagation()
           onClose()
         }}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault()
-            e.stopPropagation()
-            onClose()
-          }
-        }}
-        className="flex h-7 w-7 sm:h-4 sm:w-4 cursor-pointer items-center justify-center rounded text-text-disabled opacity-100 sm:opacity-0 transition-opacity group-hover:opacity-100 hover:bg-bg-hover focus-visible:opacity-100"
+        className="flex h-7 w-7 sm:h-4 sm:w-4 items-center justify-center rounded text-text-disabled opacity-100 sm:opacity-0 transition-opacity group-hover:opacity-100 hover:bg-bg-hover focus-visible:opacity-100"
       >
         <span className="text-xs sm:text-[10px] leading-none">✕</span>
-      </span>
+      </button>
     </button>
   )
 }

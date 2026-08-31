@@ -30,7 +30,7 @@ export default function StatusBar() {
   const terminalActive = panelOpen && panelView === 'terminal'
 
   return (
-    <footer className="flex h-6 shrink-0 items-center overflow-hidden border-t border-border bg-bg-title font-mono text-[11px] text-text-secondary">
+    <footer aria-label="Barra de status" className="flex h-6 shrink-0 items-center overflow-hidden border-t border-border bg-bg-title font-mono text-[11px] text-text-secondary">
       <div className="flex min-w-0 items-center gap-1 pl-0">
         {/* Indicador ativo: é a identidade principal também no mobile */}
         <span className="ml-1 flex h-6 shrink-0 items-center gap-1.5 pr-1 text-success sm:ml-0 sm:w-[var(--spacing-activitybar)] sm:justify-center sm:pr-0">
