@@ -68,7 +68,7 @@ export default function MobileDrawer({ onNavigate }) {
         : 'Explorer'
 
   return (
-    <div className="sm:hidden">
+    <div className="md:hidden">
       {/* Backdrop (fade) */}
       <button
         type="button"
@@ -77,13 +77,13 @@ export default function MobileDrawer({ onNavigate }) {
         tabIndex={-1}
         className="animate-drawer-backdrop fixed inset-0 z-30 cursor-default bg-black/50"
       />
-      {/* Painel lateral (slide-in da esquerda) */}
-      <aside
+      {/* Painel lateral (slide-in da esquerda) - maior em tablet */}
+      <div
         ref={panelRef}
         role="dialog"
         aria-modal="true"
         aria-label={`${viewLabel} — arquivos do portfólio`}
-        className="animate-slide-in-left fixed left-0 top-0 z-40 flex h-full w-[var(--spacing-explorer)] max-w-[85vw] flex-col border-r border-border bg-bg-side"
+        className="animate-slide-in-left fixed left-0 top-0 z-40 flex h-full w-[80vw] sm:w-[var(--spacing-explorer)] max-w-[320px] flex-col border-r border-border bg-bg-side"
       >
         <div className="flex shrink-0 items-center justify-between border-b border-border pr-1">
           <span className="px-3 py-3 font-mono text-[11px] uppercase tracking-widest text-text-muted">
@@ -94,9 +94,9 @@ export default function MobileDrawer({ onNavigate }) {
             type="button"
             onClick={toggleExplorer}
             aria-label="Fechar explorer"
-            className="flex h-8 w-8 items-center justify-center rounded text-text-secondary transition-colors hover:bg-bg-hover hover:text-text-primary"
+            className="flex h-10 w-10 sm:h-8 sm:w-8 items-center justify-center rounded text-text-secondary transition-colors hover:bg-bg-hover hover:text-text-primary"
           >
-            <Icon name="close" className="h-4 w-4" />
+            <Icon name="close" className="h-5 w-5 sm:h-4 sm:w-4" />
           </button>
         </div>
         {explorerView === 'search' ? (
@@ -106,7 +106,7 @@ export default function MobileDrawer({ onNavigate }) {
         ) : (
           <ExplorerBody onNavigate={onNavigate} />
         )}
-      </aside>
+      </div>
     </div>
   )
 }

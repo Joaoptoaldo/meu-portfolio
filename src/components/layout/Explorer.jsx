@@ -5,7 +5,8 @@
  * `explorerView` no contexto. Cada view tem seu próprio conteúdo;
  * o Explorer (view) mantém a árvore + OPEN EDITORS.
  *
- * Desktop (≥ sm): painel fixo à esquerda.
+ * Desktop (≥ md): painel fixo à esquerda com largura normal.
+ * Tablet  (sm-md): painel fixo à esquerda com largura compacta.
  * Mobile   (< sm): drawer sobreposto, controlado por `explorerVisible`
  *                  (mesmo estado; sem outro estado global). Abre pelo botão
  *                  "Arquivos" da MobileNav, fecha ao selecionar um arquivo,
@@ -29,9 +30,10 @@ export default function Explorer() {
 
   return (
     <>
-      {/* Desktop: painel com largura arrastável por mouse */}
+      {/* Desktop/Tablet: painel com largura arrastável por mouse */}
       {explorerVisible && (
         <aside
+          aria-label="Explorer"
           style={{ width: `${width}px` }}
           className="relative hidden shrink-0 flex-col border-r border-border bg-bg-side sm:flex"
         >

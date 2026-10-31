@@ -1,6 +1,9 @@
+import { Suspense, lazy } from 'react'
 import { useWorkspace } from '../../hooks/useWorkspace'
 import { useResize } from '../../hooks/useResize'
-import Terminal from './Terminal'
+
+// Lazy loading do Terminal (componente pesado)
+const Terminal = lazy(() => import('./Terminal'))
 
 const VIEWS = [
   { id: 'problems', label: 'PROBLEMS' },
@@ -77,27 +80,29 @@ export default function Panel() {
         <div className="my-auto h-0.5 w-full bg-transparent transition-colors group-hover:bg-accent group-active:bg-accent" />
       </div>
 
-      <div
-        role="tablist"
-        aria-label="Visões do painel"
-        className="flex shrink-0 items-center gap-1 border-b border-border bg-bg-title px-2"
-      >
-        {VIEWS.map((view) => (
-          <button
-            key={view.id}
-            type="button"
-            role="tab"
-            aria-selected={panelView === view.id}
-            onClick={() => selectPanelView(view.id)}
-            className={`h-8 px-3 font-mono text-[11px] transition-colors ${
-              panelView === view.id
-                ? 'border-b-2 border-b-accent text-text-primary'
-                : 'text-text-muted hover:text-text-secondary'
-            }`}
-          >
-            {view.label}
-          </button>
-        ))}
+      <div className="flex shrink-0 items-center border-b border-border bg-bg-title px-2">
+        <div
+          role="tablist"
+          aria-label="Visões do painel"
+          className="flex shrink-0 items-center gap-1"
+        >
+          {VIEWS.map((view) => (
+            <button
+              key={view.id}
+              type="button"
+              role="tab"
+              aria-selected={panelView === view.id}
+              onClick={() => selectPanelView(view.id)}
+              className={`h-8 px-3 font-mono text-[11px] transition-colors ${
+                panelView === view.id
+                  ? 'border-b-2 border-b-accent text-text-primary'
+                  : 'text-text-muted hover:text-text-secondary'
+              }`}
+            >
+              {view.label}
+            </button>
+          ))}
+        </div>
         <button
           type="button"
           onClick={togglePanel}
@@ -109,7 +114,13 @@ export default function Panel() {
       </div>
 
       <div className="min-h-0 flex-1 overflow-y-auto">
-        <View />
+        <Suspense fallback={
+          <div className="flex h-full items-center justify-center p-4">
+            <div className="h-5 w-5 animate-spin rounded-full border-2 border-accent border-t-transparent" />
+          </div>
+        }>
+          <View />
+        </Suspense>
       </div>
     </section>
   )

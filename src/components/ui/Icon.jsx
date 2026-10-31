@@ -115,6 +115,14 @@ const PATHS = {
       <path d="M4 6h.01M4 12h.01M4 18h.01" />
     </>
   ),
+  /* Download */
+  download: (
+    <>
+      <path d="M12 3v12.5" />
+      <path d="m8 11 4 4 4-4" />
+      <path d="M4 17.5v2a1.5 1.5 0 0 0 1.5 1.5h13a1.5 1.5 0 0 0 1.5-1.5v-2" />
+    </>
+  ),
   layout: (
     <>
       <rect x="3" y="4" width="18" height="16" rx="1.5" />

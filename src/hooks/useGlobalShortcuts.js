@@ -20,33 +20,65 @@ import { useWorkspace } from './useWorkspace'
  *  - Ctrl/Cmd+,              -> Settings
  *
  * Esc nos overlays é tratado no próprio componente (Palette).
+ *
+ * NOTA: Destructuring explícito das dependências para evitar re-registro
+ * do listener a cada render. As funções do contexto são estáveis (useCallback),
+ * mas o objeto ws muda a cada render (contexto não memoizado).
  */
 export function useGlobalShortcuts() {
-  const ws = useWorkspace()
+  const {
+    zen,
+    activeId,
+    restoreLayout,
+    navigateHistory,
+    toggleZen,
+    notify,
+    toggleCommandPalette,
+    toggleQuickOpen,
+    showOutline,
+    toggleGoToSymbol,
+    toggleExplorerView,
+    toggleSearchInFile,
+    toggleExplorer,
+    togglePanel,
+    splitOpen,
+    toggleSettings,
+    previousTab,
+    nextTab,
+    closeTab,
+    openFile,
+  } = useWorkspace()
 
   // Chord Ctrl+K (zen). Reset por timeout: reproduz o comportamento do VS Code
   // (solta-se Ctrl entre K e Z, então não se limpa no keyup de Ctrl).
   const chordRef = useRef({ k: false, timer: null })
+
+  // Refs estáveis para valores de estado que mudam (zen, activeId).
+  // Evita re-registro do listener por mudança de estado.
+  const zenRef = useRef(zen)
+  const activeIdRef = useRef(activeId)
+  zenRef.current = zen
+  activeIdRef.current = activeId
 
   useEffect(() => {
     function onKeyDown(e) {
       const mod = e.ctrlKey || e.metaKey
       const key = e.key.toLowerCase()
 
-      if (ws.zen && e.key === 'Escape') {
+      if (zenRef.current && e.key === 'Escape') {
         e.preventDefault()
-        ws.restoreLayout()
+        restoreLayout()
         return
       }
 
       if (e.altKey && e.key === 'ArrowLeft') {
         e.preventDefault()
-        ws.navigateHistory(-1)
+        navigateHistory(-1)
         return
       }
       if (e.altKey && e.key === 'ArrowRight') {
         e.preventDefault()
-        ws.navigateHistory(1)
+        navigateHistory(1)
         return
       }
 
@@ -66,8 +98,8 @@ export function useGlobalShortcuts() {
         e.preventDefault()
         chordRef.current.k = false
         clearTimeout(chordRef.current.timer)
-        ws.toggleZen()
-        ws.notify('Zen Mode ativado/desativado', 'success')
+        toggleZen()
+        notify('Zen Mode ativado/desativado', 'success')
         return
       }
 
@@ -81,79 +113,79 @@ export function useGlobalShortcuts() {
 
       if (key === 'p' && e.shiftKey) {
         e.preventDefault()
-        ws.toggleCommandPalette()
+        toggleCommandPalette()
         return
       }
       if (key === 'p') {
         e.preventDefault()
-        ws.toggleQuickOpen()
+        toggleQuickOpen()
         return
       }
       if (key === 'o' && e.shiftKey) {
         e.preventDefault()
-        const id = ws.activeId
+        const id = activeIdRef.current
         if (id) {
-          ws.showOutline(id).then(() => ws.toggleGoToSymbol())
+          showOutline(id).then(() => toggleGoToSymbol())
         }
         return
       }
       if (key === 'f' && e.shiftKey) {
         // Ctrl+Shift+F: busca global na sidebar.
         e.preventDefault()
-        ws.toggleExplorerView('search')
+        toggleExplorerView('search')
         return
       }
       if (key === 'f') {
         e.preventDefault()
-        ws.toggleSearchInFile()
+        toggleSearchInFile()
         return
       }
       if (key === 'e' && e.shiftKey) {
         e.preventDefault()
-        ws.toggleExplorerView('explorer')
+        toggleExplorerView('explorer')
         return
       }
       if (key === 'g' && e.shiftKey) {
         e.preventDefault()
-        ws.toggleExplorerView('scm')
+        toggleExplorerView('scm')
         return
       }
       if (key === 'b') {
         e.preventDefault()
-        ws.toggleExplorer()
+        toggleExplorer()
         return
       }
       if (key === 'j') {
         e.preventDefault()
-        ws.togglePanel()
+        togglePanel()
         return
       }
       if (key === '\\') {
         e.preventDefault()
-        const id = ws.activeId
-        if (id) ws.splitOpen(id)
+        const id = activeIdRef.current
+        if (id) splitOpen(id)
         return
       }
       if (key === ',' && !e.shiftKey) {
         e.preventDefault()
-        ws.toggleSettings()
+        toggleSettings()
         return
       }
       if (key === 'tab') {
         // Ctrl+Tab / Ctrl+Shift+Tab: alterna abas do grupo ativo.
         e.preventDefault()
-        if (e.shiftKey) ws.previousTab()
-        else ws.nextTab()
+        if (e.shiftKey) previousTab()
+        else nextTab()
         return
       }
       if (key === 'w') {
         e.preventDefault()
-        if (ws.activeId) ws.closeTab(ws.activeId)
+        if (activeIdRef.current) closeTab(activeIdRef.current)
         return
       }
       if (key === 'n' && e.shiftKey) {
         e.preventDefault()
-        ws.openFile('welcome')
+        openFile('welcome')
         return
       }
     }
@@ -164,7 +196,11 @@ export function useGlobalShortcuts() {
       window.removeEventListener('keydown', onKeyDown)
       clearTimeout(chord.timer)
     }
-  }, [ws])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [restoreLayout, navigateHistory, toggleZen, notify, toggleCommandPalette,
+    toggleQuickOpen, showOutline, toggleGoToSymbol, toggleExplorerView,
+    toggleSearchInFile, toggleExplorer, togglePanel, splitOpen,
+    toggleSettings, previousTab, nextTab, closeTab, openFile])
 
   return null
 }
