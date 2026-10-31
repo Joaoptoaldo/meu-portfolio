@@ -89,8 +89,9 @@ export const skillCategories = [
     isLearning: true,
     skills: [
       { name: '.NET', level: 'learning', progress: 25 },
-      { name: 'C#', level: 'learning', progress: 30 },
-      { name: 'ASP.NET Core', level: 'learning', progress: 15 },
+      { name: 'Express', level: 'learning', progress: 45 },
+      { name: 'Google Cloud', level: 'learning', progress: 40 },
+      { name: 'Integração com LLMs', level: 'learning', progress: 20 },
     ],
   }),
   new SkillCategory({
@@ -99,8 +100,9 @@ export const skillCategories = [
     skills: [
       { name: 'JavaScript', progress: 85 },
       { name: 'TypeScript', progress: 80 },
+      { name: 'C#', progress: 66 },
       { name: 'Python', progress: 80 },
-      { name: 'Java', progress: 40 },
+      { name: 'Java', progress: 47 },
     ],
   }),
   new SkillCategory({
@@ -118,8 +120,8 @@ export const skillCategories = [
     title: 'Backend',
     skills: [
       { name: 'Node.js', progress: 75 },
-      { name: 'Express', progress: 70 },
-      { name: 'FastAPI', progress: 60 },
+      { name: 'ASP.NET Core', progress: 60 },
+      { name: 'FastAPI', progress: 55 },
       { name: 'Django', progress: 70 },
     ],
   }),
@@ -128,7 +130,7 @@ export const skillCategories = [
     title: 'Banco de Dados',
     skills: [
       { name: 'PostgreSQL', progress: 70 },
-      { name: 'MySQL', progress: 45 },
+      { name: 'MySQL', progress: 55 },
       { name: 'MongoDB', progress: 75 },
       { name: 'SQLite', progress: 65 },
     ],

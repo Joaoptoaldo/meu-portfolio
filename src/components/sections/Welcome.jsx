@@ -79,7 +79,7 @@ export default function Welcome() {
                 >
                   <span className="min-w-0 flex-1 truncate">
                     {item.label}{' '}
-                    <span className="text-text-muted">{item.value}</span>
+                    <span className="text-text-muted/80">{item.value}</span>
                   </span>
                   <span aria-hidden="true" className="shrink-0 pl-1 text-text-disabled">↗</span>
                 </a>

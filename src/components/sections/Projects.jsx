@@ -46,7 +46,7 @@ function ProjectCard({ project }) {
               {project.authorshipLabel}
             </span>
           </span>
-          <p className="mt-1 text-xs text-text-muted">{project.tagline}</p>
+          <p className="mt-1 text-xs text-text-muted/80">{project.tagline}</p>
         </header>
 
         <p className="break-words text-sm leading-relaxed text-text-secondary">
@@ -54,7 +54,7 @@ function ProjectCard({ project }) {
         </p>
 
         {project.isTeam && project.role && (
-          <p className="mt-2.5 rounded border border-border bg-bg-hover px-2.5 py-1.5 font-mono text-[11px] leading-relaxed text-text-muted">
+          <p className="mt-2.5 rounded border border-border bg-bg-hover px-2.5 py-1.5 font-mono text-[11px] leading-relaxed text-text-muted/80">
             {project.role}
           </p>
         )}
