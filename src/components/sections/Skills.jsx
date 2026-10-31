@@ -36,8 +36,8 @@ function SkillBar({ progress }) {
   return (
     <div className="min-w-0">
       <div className="mb-1 flex items-center justify-between gap-2 text-[10px] leading-none">
-        <span className="truncate text-text-muted">{LABEL_FALLBACK}: {pct}%</span>
-        <span className="shrink-0 text-text-muted">{levelLabel(pct)}</span>
+        <span className="truncate text-text-muted/80">{LABEL_FALLBACK}: {pct}%</span>
+        <span className="shrink-0 text-text-muted/80">{levelLabel(pct)}</span>
       </div>
       <div className="h-1.5 w-full overflow-hidden rounded-full bg-bg-hover" role="presentation">
         <div
@@ -57,9 +57,9 @@ function SkillTag({ name, level, progress, hideLevel }) {
   const levelUi = level && !hideLevel ? LEVEL_UI[level] : null
 
   return (
-    <li className="rounded-md border border-border bg-bg-side/60 px-4 py-3.5 shadow-[0_0_0_1px_rgba(255,255,255,0.01)_inset]">
-      <div className="flex items-start gap-3">
-        <TechIcon name={name} className="mt-0.5 h-4 w-4 shrink-0" />
+    <li className="group rounded-md border border-border bg-bg-side/60 px-4 py-3.5 shadow-[0_0_0_1px_rgba(255,255,255,0.01)_inset] transition-colors duration-200 hover:border-accent-border/50 hover:bg-bg-side/80">
+      <div className="flex items-center gap-3">
+        <TechIcon name={name} className="mt-0.5 h-8 w-8 shrink-0" />
         <span className="min-w-0 flex-1 truncate font-mono text-sm font-medium text-text-primary">
           {name}
         </span>

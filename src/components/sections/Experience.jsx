@@ -38,7 +38,7 @@ export default function Experience() {
                   {item.role}
                 </h2>
                 {item.period && (
-                  <span className="rounded-full border border-border px-2.5 py-0.5 font-mono text-[10px] text-text-muted">
+                  <span className="rounded-full border border-border px-2.5 py-0.5 font-mono text-[10px] text-text-muted/80">
                     {item.period}
                   </span>
                 )}

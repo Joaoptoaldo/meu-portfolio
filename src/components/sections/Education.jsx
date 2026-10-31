@@ -40,7 +40,7 @@ export default function Education() {
 
             <dl className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2">
               <div className="rounded border border-border bg-bg-editor px-3 py-2">
-                <dt className="font-mono text-[11px] uppercase tracking-widest text-text-muted">
+                <dt className="font-mono text-[11px] uppercase tracking-widest text-text-muted/80">
                   status
                 </dt>
                 <dd className="font-mono text-sm text-accent-bright">
@@ -48,7 +48,7 @@ export default function Education() {
                 </dd>
               </div>
               <div className="rounded border border-border bg-bg-editor px-3 py-2">
-                <dt className="font-mono text-[11px] uppercase tracking-widest text-text-muted">
+                <dt className="font-mono text-[11px] uppercase tracking-widest text-text-muted/80">
                   duração
                 </dt>
                 <dd className="font-mono text-sm text-accent-bright">

@@ -69,19 +69,19 @@ export default function About() {
         </h2>
         <dl className="grid grid-cols-1 gap-3 font-mono text-sm sm:grid-cols-2 md:grid-cols-4">
           <div className="flex flex-col gap-0.5 rounded border border-border bg-bg-editor p-2.5">
-            <dt className="text-[10px] uppercase tracking-widest text-text-muted">nome</dt>
+            <dt className="text-[10px] uppercase tracking-widest text-text-muted/80">nome</dt>
             <dd className="truncate text-text-primary">{profile.name}</dd>
           </div>
           <div className="flex flex-col gap-0.5 rounded border border-border bg-bg-editor p-2.5">
-            <dt className="text-[10px] uppercase tracking-widest text-text-muted">área</dt>
+            <dt className="text-[10px] uppercase tracking-widest text-text-muted/80">área</dt>
             <dd className="truncate text-text-primary">{profile.area}</dd>
           </div>
           <div className="flex flex-col gap-0.5 rounded border border-border bg-bg-editor p-2.5">
-            <dt className="text-[10px] uppercase tracking-widest text-text-muted">formação</dt>
+            <dt className="text-[10px] uppercase tracking-widest text-text-muted/80">formação</dt>
             <dd className="truncate text-text-primary">{profile.formation}</dd>
           </div>
           <div className="flex flex-col gap-0.5 rounded border border-border bg-bg-editor p-2.5">
-            <dt className="text-[10px] uppercase tracking-widest text-text-muted">instituição</dt>
+            <dt className="text-[10px] uppercase tracking-widest text-text-muted/80">instituição</dt>
             <dd className="truncate text-text-primary">{profile.institution}</dd>
           </div>
         </dl>

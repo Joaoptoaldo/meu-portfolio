@@ -29,14 +29,14 @@ export default function Contact() {
             className="group flex flex-col justify-between gap-2 rounded-md border border-border bg-bg-side/60 p-5 transition-all duration-200 hover:border-border-strong hover:bg-bg-hover active:scale-[0.99]"
           >
             <div>
-              <span className="font-mono text-xs uppercase tracking-widest text-text-muted">
+              <span className="font-mono text-xs uppercase tracking-widest text-text-muted/80">
                 {channel.label}
               </span>
               <span className="mt-1 block truncate font-mono text-sm text-accent transition-colors group-hover:text-accent-bright">
                 {channel.value}
               </span>
               {channel.hint && (
-                <span className="mt-1 block text-xs text-text-muted">{channel.hint}</span>
+                <span className="mt-1 block text-xs text-text-muted/80">{channel.hint}</span>
               )}
             </div>
             <span
